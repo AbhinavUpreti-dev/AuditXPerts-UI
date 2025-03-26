@@ -187,7 +187,7 @@ export const getePermitsDataSuccess = (response: any): AppAction => {
   }
 }
 
-export const getWeQuoteData = (filters: any): AppAction => {
+export const getwebQuotesData = (filters: any): AppAction => {
   return {
     type: actionTypes.GET_WEQUOTE_DATA,
     payload: filters
