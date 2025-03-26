@@ -30,7 +30,8 @@ export const actionTypes = {
   GET_WEQUOTE_DATA: `${prefix}GET_WEQUOTE_DATA`,
   GET_WEQUOTE_DATA_SUCCESS: `${prefix}GET_WEQUOTE_DATA_SUCCESS`,
   GET_ELOGBOOK_DATA: `${prefix}GET_ELOGBOOK_DATA`,
-  GET_ELOGBOOK_DATA_SUCCESS: `${prefix}GET_ELOGBOOK_DATA_SUCCESS`
+  GET_ELOGBOOK_DATA_SUCCESS: `${prefix}GET_ELOGBOOK_DATA_SUCCESS`,
+  GET_IFMHub_INSIGHT_SUCCESS: `${prefix}GET_IFMHub_INSIGHT_SUCCESS`
 
 };
 
@@ -169,6 +170,13 @@ export const getAuditInsightItems = (filters: any, isIFMHub: boolean): AppAction
 export const getAuditInsightSuccess = (response: any, isIFMHub: boolean): AppAction => {
   return {
     type: actionTypes.GET_AUDIT_INSIGHT_SUCCESS,
+    payload: { response, isIFMHub}
+  }
+}
+
+export const getIFMHubInsightSuccess = (response: any, isIFMHub: boolean): AppAction => {
+  return {
+    type: actionTypes.GET_IFMHub_INSIGHT_SUCCESS,
     payload: { response, isIFMHub}
   }
 }

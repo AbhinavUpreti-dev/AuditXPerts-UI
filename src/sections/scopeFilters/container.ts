@@ -32,6 +32,8 @@ const mapStateToProps = (state: AppState) => {
     auditSummary: state.searchState.auditSummary,
     auditActionItems: state.searchState.auditActionItems,
     auditInsight: state.searchState.auditInsight,
+    ifmHubInsight: state.searchState.ifmHubInsight,
+    incidentInsight: state.searchState.incidentInsight,
     ePermitsData: state.searchState.ePermitsData,
     elogBooksData: state.searchState.elogBooksData,
     webQuotesData: state.searchState.webQuotesData

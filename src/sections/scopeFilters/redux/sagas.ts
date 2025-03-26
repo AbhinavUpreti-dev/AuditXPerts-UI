@@ -1,5 +1,5 @@
 import { post } from "../api-clients.ts";
-import { takeLatest, call, put, select } from "redux-saga/effects";
+import { takeLatest, call, put, select, takeEvery } from "redux-saga/effects";
 import { get as getApi } from "../api-clients.ts";
 import {
   fetchSearchResultSuccess, actionTypes, fetchSearchResultAppend,
@@ -13,7 +13,8 @@ import {
   getAuditInsightSuccess,
   getePermitsDataSuccess,
   getelogBooksDataSuceess,
-  getWeQuoteDataSuccess
+  getWeQuoteDataSuccess,
+  getIFMHubInsightSuccess
 } from "./actions.ts";
 //import { toast, generateId } from "middleware/toasts";
 //import { Response } from "models/response";
@@ -130,7 +131,13 @@ export const getScopeFilterDataApi = (filter:string) =>
             getAuditInsightApi, 
             action.payload
           );
-          yield put(getAuditInsightSuccess(response, action.payload.isIFMHub));
+          if(!action.payload.isIFMHub)
+          {
+            yield put(getAuditInsightSuccess(response, action.payload.isIFMHub));
+          }   
+          else{
+            yield put(getIFMHubInsightSuccess(response, action.payload.isIFMHub));
+          }       
         } catch (error) {
           throw error;
         }
@@ -275,7 +282,7 @@ export function* searchWatchSagas() {
   yield takeLatest(actionTypes.GET_RECOMMENDATION, getRecommendations);
 
   yield takeLatest(actionTypes.GET_AUDIT_ACTION_ITEMS, getAuditActionItems);
-  yield takeLatest(actionTypes.GET_AUDIT_INSIGHT, getAuditInsightItems);
+  yield takeEvery(actionTypes.GET_AUDIT_INSIGHT, getAuditInsightItems);
   yield takeLatest(actionTypes.GET_EPERMIT_DATA, getEPermitsData);
   yield takeLatest(actionTypes.GET_ELOGBOOK_DATA, geteLogBooksData);
   yield takeLatest(actionTypes.GET_WEQUOTE_DATA, getWebQuoteData);

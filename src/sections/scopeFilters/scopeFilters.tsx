@@ -46,6 +46,8 @@ export interface ScopeFiltersProps {
 
   getAuditInSight(filters: string, isIFMHub: boolean): void;
   auditInsight: any;
+  ifmHubInsight: any;
+  incidentInsight: any;
 
   getePermitsData(filters: any): void;
   ePermitsData: any;
@@ -1470,11 +1472,44 @@ export const ScopeFiltersComponent: React.FC<
           </>
         );
       case SectionType.AuditSiteInsights:
-        return <ReactMarkdown>{props.auditInsight}</ReactMarkdown>;
+        if(insightProjectName.includes(ProjectNameInsight.harBour) && insightProjectName.includes(ProjectNameInsight.IFMhub)) {
+          return (
+          <>
+          <h3>Harbour Summary</h3>
+          <ReactMarkdown>{props.auditInsight}</ReactMarkdown>
+          {/* <ReactMarkdown>{props.incidentInsight}</ReactMarkdown> */}
+          <h3>IFM hub Summary</h3>
+        <ReactMarkdown>{props.ifmHubInsight}</ReactMarkdown>
+        </>
+        
+          )
+         } 
+         else if(insightProjectName.includes(ProjectNameInsight.IFMhub)) {
+          return (
+            <>
+            <h3>IFM hub Summary</h3>
+          <ReactMarkdown>{props.ifmHubInsight}</ReactMarkdown>
+          </>
+          )
+        }
+        else if(insightProjectName.includes(ProjectNameInsight.harBour)) {
+          return (
+            <>
+            <h3>Harbour Summary</h3>
+            <ReactMarkdown>{props.auditInsight}</ReactMarkdown>
+            <ReactMarkdown>{props.incidentInsight}</ReactMarkdown>
+          </>
+          )
+        }
+        
       case SectionType.Recommendation:
         return <ReactMarkdown>{props.recommendations}</ReactMarkdown>;
     }
   };
+  const getInsightsData = () => {
+     
+  }
+  
   return (
     <>
       {
