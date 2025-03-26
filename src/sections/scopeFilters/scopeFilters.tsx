@@ -57,7 +57,6 @@ export interface ScopeFiltersProps {
 
   getelogBooksData(filters: any): void;
   elogBooksData: any;
-  auditeInsiteIFMHub: any;
 }
 
 export const ScopeFiltersComponent: React.FC<
