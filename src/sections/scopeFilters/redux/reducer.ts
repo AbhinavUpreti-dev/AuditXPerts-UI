@@ -151,7 +151,8 @@ const handlers: {
   [actionTypes.GET_AUDIT_INSIGHT_SUCCESS]: (state: SearchState, payload: any): SearchState => {
     return {
       ...state,
-      auditInsight: payload.isIFMHub ? payload.response.incidentSummary : payload.response.auditSummary,
+      auditInsight: payload.response.auditSummary,
+      auditeInsiteIFMHub: payload.response.incidentSummary,
      
     };
   },

@@ -55,6 +55,7 @@ export interface ScopeFiltersProps {
 
   getelogBooksData(filters: any): void;
   elogBooksData: any;
+  auditeInsiteIFMHub: any;
 }
 
 export const ScopeFiltersComponent: React.FC<
@@ -148,9 +149,9 @@ export const ScopeFiltersComponent: React.FC<
     SectionType | undefined
   >(undefined);
 
-  const [selectedMonth, setSelectedMonth] = React.useState<
-  Months | undefined
-  >(undefined);
+  const [selectedMonth, setSelectedMonth] = React.useState<Months | undefined>(
+    undefined
+  );
   interface FilterMapping {
     key: ScopeFilterAttributeEnum;
     setter: (value: any) => void;
@@ -289,9 +290,21 @@ export const ScopeFiltersComponent: React.FC<
           },
         ];
       case "documentGroup":
-        return [{ label: "C - Electrical Safety Logbook", value: "C - Electrical Safety Logbook" }];
+        return [
+          {
+            label: "C - Electrical Safety Logbook",
+            value: "C - Electrical Safety Logbook",
+          },
+        ];
       case "documentSubGroup":
-        return [{ label: "010 Electrical Installation Certificates (including Minor Works)", value: "010 Electrical Installation Certificates (including Minor Works)" }];
+        return [
+          {
+            label:
+              "010 Electrical Installation Certificates (including Minor Works)",
+            value:
+              "010 Electrical Installation Certificates (including Minor Works)",
+          },
+        ];
       case "customDocumentGroup":
         return [
           { label: "Custom Document Group", value: "customDocumentGroup" },
@@ -1123,7 +1136,6 @@ export const ScopeFiltersComponent: React.FC<
   const renderAuditInsite = () => {
     return (
       <>
-
         <div className="chips">
           <div
             className={`${
@@ -1147,9 +1159,9 @@ export const ScopeFiltersComponent: React.FC<
           </div>
         </div>
         {getFilters()}
-      
+
         <div className="chips">
-        <h4>Get Audit Insight for</h4>
+          <h4>Get Audit Insight for</h4>
           <div
             className={`chip ${
               selectedMonth === Months["3Months"] ? "chip-selected" : ""
@@ -1160,9 +1172,7 @@ export const ScopeFiltersComponent: React.FC<
           </div>
           <div
             className={`chip ${
-              selectedMonth === Months["6Months"]
-                ? "chip-selected"
-                : ""
+              selectedMonth === Months["6Months"] ? "chip-selected" : ""
             }`}
             onClick={() => getMonths(Months["6Months"])}
           >
@@ -1395,9 +1405,8 @@ export const ScopeFiltersComponent: React.FC<
   console.log("===<", props.ePermitsData);
 
   const renderMarkDown = () => {
-    console.log("Actions data", props.auditActionItems)
+    console.log("Actions data", props.auditActionItems);
     switch (sectionTypes) {
-      
       case SectionType.AuditAction:
         return <ReactMarkdown>{props.auditActionItems}</ReactMarkdown>;
       case SectionType.AuditSummary:
@@ -1471,13 +1480,29 @@ export const ScopeFiltersComponent: React.FC<
 
             {projectName.includes(ProjectName.elogBooks) && (
               <>
-                <ReactMarkdown>{props.elogBooksData}</ReactMarkdown>
+              <h3>elogBooks</h3>
+              <ReactMarkdown>{props.elogBooksData}</ReactMarkdown>
               </>
             )}
           </>
         );
       case SectionType.AuditSiteInsights:
-        return <ReactMarkdown>{props.auditInsight}</ReactMarkdown>;
+        if (insightProjectName.includes(ProjectNameInsight.harBour)) {
+          return (
+            <>
+              <h3>Harbour Summary</h3>
+              <ReactMarkdown>{props.auditInsight}</ReactMarkdown>
+            </>
+          );
+        }
+        if (insightProjectName.includes(ProjectNameInsight.IFMhub)) {
+          return (
+            <>
+              <h3>IFM Hub Summary</h3>
+              <ReactMarkdown>{props.auditActionItems}</ReactMarkdown>
+            </>
+          );
+        }
       case SectionType.Recommendation:
         return <ReactMarkdown>{props.recommendations}</ReactMarkdown>;
     }
