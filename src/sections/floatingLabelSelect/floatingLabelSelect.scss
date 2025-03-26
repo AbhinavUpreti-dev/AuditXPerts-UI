@@ -1,0 +1,49 @@
+//@import "styles/colors.scss";
+.floating-label-select {
+  position: relative;
+  margin-top: 20px;
+}
+
+.floating-label-select label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  transition: all 0.2s ease;
+  pointer-events: none;
+  color: #999;
+  //z-index: 5;
+  background-color: white;
+}
+
+.floating-label-select.focused label,
+.floating-label-select .react-select__control--is-focused + label,
+.floating-label-select .react-select__control--menu-is-open + label,
+.floating-label-select .react-select__single-value {
+  top: 0;
+  left: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.floating-label-select .react-select__control {
+  width: 100%;
+  padding: 10px;
+  padding-left: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.section-container__select > div:first-of-type {
+  min-height: 50px !important;
+  height: 48px;
+  border-color: black;
+}
+
+.assistiveText {
+  font-size: 14px;
+  color: #999;
+  margin-top: 5px;
+}
+.error > div:first-of-type {
+  border-color: red !important;
+}

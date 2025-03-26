@@ -1,0 +1,25 @@
+//@import "styles/media.scss";
+
+.default-layout-wrapper{
+  margin-top: 44px;  
+  // @include media-breakpoint-up(lg) {
+  //   margin-top: 68px;
+  // }
+  position: relative;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  &--fluid{
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  &--nonScroll{
+    overflow-y: hidden !important;
+    position: relative !important;
+  }
+  &--NonScroll{
+    overflow-y: hidden !important;
+  }
+}
+  
+
