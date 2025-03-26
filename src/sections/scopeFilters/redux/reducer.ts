@@ -176,7 +176,7 @@ const handlers: {
   [actionTypes.GET_ELOGBOOK_DATA_SUCCESS]: (state: SearchState, payload: any): SearchState => {
     return {
       ...state,
-      elogBooksData: payload,
+      elogBooksData: payload[0].recommendations,
     };
   },
   [actionTypes.GET_WEQUOTE_DATA_SUCCESS]: (state: SearchState, payload: any): SearchState => {

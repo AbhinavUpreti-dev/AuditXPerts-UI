@@ -213,7 +213,7 @@ export const getScopeFilterDataApi = (filter:string) =>
           // {
           //   url = `${url}&${queryFilter}`;
           // }
-          return post(`https://atwapi-qat.cbreapps.com/api/GetPtwDashboard`,request);
+          return post(`https://localhost:7181/api/ElogBook/recommendations`,request);
         }
         
         export function* geteLogBooksData(action: AppAction) {
@@ -223,9 +223,9 @@ export const getScopeFilterDataApi = (filter:string) =>
               action.payload
             );
           //  yield put(getelogBooksDataSuceess(response));
-            if (response.success) {
-              yield put(getelogBooksDataSuceess(response?.data || {}));
-            }
+           
+              yield put(getelogBooksDataSuceess(response || {}));
+            
           } catch (error) {
             throw error;
           }
