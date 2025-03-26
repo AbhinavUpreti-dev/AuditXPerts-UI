@@ -11,6 +11,7 @@ import {
   getelogBooksData,
   getePermitsData,
   getRecommendation,
+  getwebQuotesData,
 } from "./redux/actions.ts";
 import { get } from "http";
 
@@ -28,7 +29,7 @@ const mapStateToProps = (state: AppState) => {
     client: state.searchState.client,
     location: state.searchState.location,
    // auditData: audit,
-    recommendations: reco,
+    recommendations: state.searchState.recommendations,
     auditSummary: state.searchState.auditSummary,
     auditActionItems: state.searchState.auditActionItems,
     auditInsight: state.searchState.auditInsight,
@@ -36,7 +37,8 @@ const mapStateToProps = (state: AppState) => {
     incidentInsight: state.searchState.incidentInsight,
     ePermitsData: state.searchState.ePermitsData,
     elogBooksData: state.searchState.elogBooksData,
-    webQuotesData: state.searchState.webQuotesData
+    webQuotesData: state.searchState.webQuotesData,
+    auditeInsiteIFMHub: state.searchState.auditeInsiteIFMHub
   };
 };
 
@@ -86,7 +88,4 @@ export const ScopeFiltersContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ScopeFilters);
-function getwebQuotesData(filters: any): AppAction {
-  throw new Error("Function not implemented.");
-}
 

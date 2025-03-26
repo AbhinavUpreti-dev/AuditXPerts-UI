@@ -57,6 +57,7 @@ export interface ScopeFiltersProps {
 
   getelogBooksData(filters: any): void;
   elogBooksData: any;
+  auditeInsiteIFMHub: any;
 }
 
 export const ScopeFiltersComponent: React.FC<
@@ -150,9 +151,9 @@ export const ScopeFiltersComponent: React.FC<
     SectionType | undefined
   >(undefined);
 
-  const [selectedMonth, setSelectedMonth] = React.useState<
-  Months | undefined
-  >(undefined);
+  const [selectedMonth, setSelectedMonth] = React.useState<Months | undefined>(
+    undefined
+  );
   interface FilterMapping {
     key: ScopeFilterAttributeEnum;
     setter: (value: any) => void;
@@ -291,9 +292,21 @@ export const ScopeFiltersComponent: React.FC<
           },
         ];
       case "documentGroup":
-        return [{ label: "C - Electrical Safety Logbook", value: "C - Electrical Safety Logbook" }];
+        return [
+          {
+            label: "C - Electrical Safety Logbook",
+            value: "C - Electrical Safety Logbook",
+          },
+        ];
       case "documentSubGroup":
-        return [{ label: "010 Electrical Installation Certificates (including Minor Works)", value: "010 Electrical Installation Certificates (including Minor Works)" }];
+        return [
+          {
+            label:
+              "010 Electrical Installation Certificates (including Minor Works)",
+            value:
+              "010 Electrical Installation Certificates (including Minor Works)",
+          },
+        ];
       case "customDocumentGroup":
         return [
           { label: "Custom Document Group", value: "customDocumentGroup" },
@@ -922,17 +935,22 @@ export const ScopeFiltersComponent: React.FC<
   };
   const getAuditSummury = () => {
     const req = {
-      Pagination: { Skip: 0, Take: 50 },
+      Pagination: { Skip: 0, Take: 5 },
       Filters: [
-        { FieldName: "Customer", Value: customer.value },
-        { FieldName: "Contract", Value: project.value },
-        { FieldName: "Site", Value: building.value },
+        { FieldName: "Customer", Value: "OnBoarding Test" },
+        { FieldName: "Contract", Value: '' },
+        { FieldName: "Site", Value: '' },
       ],
     };
     const request = {
       customerName: customer.value,
       contractName: project.value,
       buildingName: building.value,
+    };
+    const requestWebQuote = {
+      clientName: 'Santander',
+      contractReference: 'CA000627.012',
+      locationDescription: 'Aberdeen 171-173 US',
     };
 
     if (projectName.includes(ProjectName.ePermits)) {
@@ -942,8 +960,8 @@ export const ScopeFiltersComponent: React.FC<
       props.getelogBooksData(request);
     }
 
-    if (projectName.includes(projectName.webQuote)) {
-      props.getwebQuotesData(request);
+    if (projectName.includes(ProjectName.webQuote)) {
+      props.getwebQuotesData(requestWebQuote);
     }
   };
 
@@ -1120,7 +1138,6 @@ export const ScopeFiltersComponent: React.FC<
   const renderAuditInsite = () => {
     return (
       <>
-
         <div className="chips">
           <div
             className={`${
@@ -1144,9 +1161,9 @@ export const ScopeFiltersComponent: React.FC<
           </div>
         </div>
         {getFilters()}
-      
+
         <div className="chips">
-        <h4>Get Audit Insight for</h4>
+          <h4>Get Audit Insight for</h4>
           <div
             className={`chip ${
               selectedMonth === Months["3Months"] ? "chip-selected" : ""
@@ -1157,9 +1174,7 @@ export const ScopeFiltersComponent: React.FC<
           </div>
           <div
             className={`chip ${
-              selectedMonth === Months["6Months"]
-                ? "chip-selected"
-                : ""
+              selectedMonth === Months["6Months"] ? "chip-selected" : ""
             }`}
             onClick={() => getMonths(Months["6Months"])}
           >
@@ -1392,9 +1407,8 @@ export const ScopeFiltersComponent: React.FC<
   console.log("===<", props.ePermitsData);
 
   const renderMarkDown = () => {
-    console.log("Actions data", props.auditActionItems)
+    console.log("Actions data", props.auditActionItems);
     switch (sectionTypes) {
-      
       case SectionType.AuditAction:
         return <ReactMarkdown>{props.auditActionItems}</ReactMarkdown>;
       case SectionType.AuditSummary:
@@ -1440,20 +1454,22 @@ export const ScopeFiltersComponent: React.FC<
                     <Table striped>
                       <thead>
                         <tr>
-                          <th>Permit</th>
-                          <th>Permit Type</th>
+                          <th>Category</th>
+                          <th>Group Description</th>
+                          <th>SubGroup Description</th>
                           <th>Status</th>
-                          <th>Vendoe</th>
+                          <th>Description</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {props.ePermitsData?.map((item: any) => {
+                        {props.webQuotesData?.map((item: any) => {
                           return (
                             <tr>
-                              <td>{item.Permit}</td>
-                              <td>{item.PermitType}</td>
-                              <td>{item.Status}</td>
-                              <td>{item.Vendor}</td>
+                              <td>{item.category}</td>
+                              <td>{item.groupDescription || 'NA'}</td>
+                              <td>{item.subGroupDescription || 'NA'}</td>
+                              <td>{item.status}</td>
+                              <td>{item.description}</td>  
                             </tr>
                           );
                         })}
@@ -1466,7 +1482,8 @@ export const ScopeFiltersComponent: React.FC<
 
             {projectName.includes(ProjectName.elogBooks) && (
               <>
-                <ReactMarkdown>{props.elogBooksData}</ReactMarkdown>
+              <h3>elogBooks</h3>
+              <ReactMarkdown>{props.elogBooksData}</ReactMarkdown>
               </>
             )}
           </>
@@ -1506,9 +1523,6 @@ export const ScopeFiltersComponent: React.FC<
         return <ReactMarkdown>{props.recommendations}</ReactMarkdown>;
     }
   };
-  const getInsightsData = () => {
-     
-  }
   
   return (
     <>

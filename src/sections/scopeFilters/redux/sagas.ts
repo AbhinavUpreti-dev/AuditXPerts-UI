@@ -166,10 +166,10 @@ export const getScopeFilterDataApi = (filter:string) =>
           getRecommendationDataApi, 
           action.payload
         );
-        yield put(getRecommendationSuccess(response));
-        if (response.success) {
-          yield put(getRecommendationSuccess(response?.data || {}));
-        }
+        // yield put(getRecommendationSuccess(response));
+        
+          yield put(getRecommendationSuccess(response || {}));
+        
       } catch (error) {
         throw error;
       }
@@ -220,7 +220,7 @@ export const getScopeFilterDataApi = (filter:string) =>
           // {
           //   url = `${url}&${queryFilter}`;
           // }
-          return post(`https://atwapi-qat.cbreapps.com/api/GetPtwDashboard`,request);
+          return post(`https://localhost:7181/api/ElogBook/recommendations`,request);
         }
         
         export function* geteLogBooksData(action: AppAction) {
@@ -230,9 +230,9 @@ export const getScopeFilterDataApi = (filter:string) =>
               action.payload
             );
           //  yield put(getelogBooksDataSuceess(response));
-            if (response.success) {
-              yield put(getelogBooksDataSuceess(response?.data || {}));
-            }
+           
+              yield put(getelogBooksDataSuceess(response || {}));
+            
           } catch (error) {
             throw error;
           }
@@ -251,7 +251,7 @@ export const getScopeFilterDataApi = (filter:string) =>
             // {
             //   url = `${url}&${queryFilter}`;
             // }
-            return post(`https://atwapi-qat.cbreapps.com/api/GetPtwDashboard`,request);
+            return getApi(`https://localhost:7181/api/WebQuote/GetQuoteEstimates?ClientName=${request.clientName}&LocationDescription=${request.locationDescription}&ContractReference=${request.contractReference}`);
           }
           
           export function* getWebQuoteData(action: AppAction) {
@@ -261,9 +261,9 @@ export const getScopeFilterDataApi = (filter:string) =>
                 action.payload
               );
              // yield put(getePermitsDataSuccess(response));
-              if (response.success) {
-                yield put(getWeQuoteDataSuccess(response?.data || {}));
-              }
+              
+                yield put(getWeQuoteDataSuccess(response || {}));
+              
             } catch (error) {
               throw error;
             }
