@@ -34,7 +34,8 @@ const mapStateToProps = (state: AppState) => {
     auditInsight: state.searchState.auditInsight,
     ePermitsData: state.searchState.ePermitsData,
     elogBooksData: state.searchState.elogBooksData,
-    webQuotesData: state.searchState.webQuotesData
+    webQuotesData: state.searchState.webQuotesData,
+    auditeInsiteIFMHub: state.searchState.auditeInsiteIFMHub
   };
 };
 

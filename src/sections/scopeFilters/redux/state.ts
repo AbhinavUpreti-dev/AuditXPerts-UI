@@ -12,6 +12,7 @@ export interface SearchState extends BaseLoadingState {
   elogBooksData?: any;
   ePermitsData?: any;
   webQuotesData?: any;
+  auditeInsiteIFMHub?: any;
   [key: string]: any;
   businessSegment?: {
     isLoading: boolean;
