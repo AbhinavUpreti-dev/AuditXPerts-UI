@@ -933,17 +933,22 @@ export const ScopeFiltersComponent: React.FC<
   };
   const getAuditSummury = () => {
     const req = {
-      Pagination: { Skip: 0, Take: 50 },
+      Pagination: { Skip: 0, Take: 5 },
       Filters: [
-        { FieldName: "Customer", Value: customer.value },
-        { FieldName: "Contract", Value: project.value },
-        { FieldName: "Site", Value: building.value },
+        { FieldName: "Customer", Value: "OnBoarding Test" },
+        { FieldName: "Contract", Value: '' },
+        { FieldName: "Site", Value: '' },
       ],
     };
     const request = {
       customerName: customer.value,
       contractName: project.value,
       buildingName: building.value,
+    };
+    const requestWebQuote = {
+      clientName: 'Santander',
+      contractReference: 'CA000627.012',
+      locationDescription: 'Aberdeen 171-173 US',
     };
 
     if (projectName.includes(ProjectName.ePermits)) {
@@ -953,8 +958,8 @@ export const ScopeFiltersComponent: React.FC<
       props.getelogBooksData(request);
     }
 
-    if (projectName.includes(projectName.webQuote)) {
-      props.getwebQuotesData(request);
+    if (projectName.includes(ProjectName.webQuote)) {
+      props.getwebQuotesData(requestWebQuote);
     }
   };
 
@@ -1447,20 +1452,22 @@ export const ScopeFiltersComponent: React.FC<
                     <Table striped>
                       <thead>
                         <tr>
-                          <th>Permit</th>
-                          <th>Permit Type</th>
+                          <th>Category</th>
+                          <th>Group Description</th>
+                          <th>SubGroup Description</th>
                           <th>Status</th>
-                          <th>Vendoe</th>
+                          <th>Description</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {props.ePermitsData?.map((item: any) => {
+                        {props.webQuotesData?.map((item: any) => {
                           return (
                             <tr>
-                              <td>{item.Permit}</td>
-                              <td>{item.PermitType}</td>
-                              <td>{item.Status}</td>
-                              <td>{item.Vendor}</td>
+                              <td>{item.category}</td>
+                              <td>{item.groupDescription || 'NA'}</td>
+                              <td>{item.subGroupDescription || 'NA'}</td>
+                              <td>{item.status}</td>
+                              <td>{item.description}</td>  
                             </tr>
                           );
                         })}
