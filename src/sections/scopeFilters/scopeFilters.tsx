@@ -1445,7 +1445,7 @@ export const ScopeFiltersComponent: React.FC<
                    </div>
                 ) : (
                   <>
-                    {props.ePermitsData?.ePermitsData && props.ePermitsData?.ePermitsData.length > 0 && (
+                    {props.ePermitsData?.ePermitsData && props.ePermitsData?.ePermitsData?.length > 0 && (
                       <>
                         <Card>
                           <CardBody>
@@ -1460,7 +1460,7 @@ export const ScopeFiltersComponent: React.FC<
                                 </tr>
                               </thead>
                               <tbody>
-                                {props.ePermitsData?.map((item: any) => {
+                                {props.ePermitsData?.ePermitsData?.map((item: any) => {
                                   return (
                                     <tr>
                                       <td>{item.Permit}</td>
