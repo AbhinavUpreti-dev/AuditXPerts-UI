@@ -243,7 +243,10 @@ const handlers: {
   ): SearchState => {
     return {
       ...state,
-      isLoading: true,
+     ePermitsData:{
+        ePermitsData: [],
+        isLoading: true
+     }
     };
   },
   [actionTypes.GET_EPERMIT_DATA_SUCCESS]: (
@@ -252,90 +255,92 @@ const handlers: {
   ): SearchState => {
     return {
       ...state,
-      ePermitsData: [
-        {
-          Id: "8505b2eb-7826-417d-841a-9f590773b847",
-          PtwId: "000003159",
-          AtwId: "",
-          Status: "InProgress",
-          Vendor: "1call propert maintenance",
-          Customer: "Onboarding Test",
-          Contract: "Onboarding Test",
-          Site: "Building One",
-          Permit: "Electrical Work Permit",
-          PermitType: "Digital",
-          PermitDisplayText: "",
-          PermitTypeDisplayText: "",
-          Permits: "",
-          StartDate: "2025-03-26T16:32:02.8986537",
-          StartTime: null,
-          EndTime: null,
-          WorkRequestId: "00000000-0000-0000-0000-000000000000",
-          WorkRequestType: "",
-          WorkRequestStatus: "",
-          ScheduleSiteVisitDate: null,
-          OnsiteSiteVisitDate: null,
-          ScheduleStatus: "",
-          OnSiteStatus: "",
-          ClosureStatus: "",
-          LastUpdatedDate: "2025-03-26T16:33:00.2693047",
-        },
-        {
-          Id: "f1afd280-6380-4884-982a-465ef0ccf4b4",
-          PtwId: "000003157",
-          AtwId: "",
-          Status: "InProgress",
-          Vendor: "1call propert maintenance",
-          Customer: "Onboarding Test",
-          Contract: "Onboarding Test",
-          Site: "Building One",
-          Permit: "Electrical Work Permit ",
-          PermitType: "Printed",
-          PermitDisplayText: "",
-          PermitTypeDisplayText: "",
-          Permits: "",
-          StartDate: "2025-03-26T16:18:07.3280049",
-          StartTime: null,
-          EndTime: null,
-          WorkRequestId: "00000000-0000-0000-0000-000000000000",
-          WorkRequestType: "",
-          WorkRequestStatus: "",
-          ScheduleSiteVisitDate: null,
-          OnsiteSiteVisitDate: null,
-          ScheduleStatus: "",
-          OnSiteStatus: "",
-          ClosureStatus: "",
-          LastUpdatedDate: "2025-03-26T16:19:18.864039",
-        },
-        {
-          Id: "8505b2eb-7826-417d-841a-9f590773b847",
-          PtwId: "000003159",
-          AtwId: "",
-          Status: "InProgress",
-          Vendor: "1call propert maintenance",
-          Customer: "Onboarding Test",
-          Contract: "Onboarding Test",
-          Site: "Building One",
-          Permit: "Electrical Work Permit",
-          PermitType: "Digital",
-          PermitDisplayText: "",
-          PermitTypeDisplayText: "",
-          Permits: "",
-          StartDate: "2025-03-26T16:32:02.8986537",
-          StartTime: null,
-          EndTime: null,
-          WorkRequestId: "00000000-0000-0000-0000-000000000000",
-          WorkRequestType: "",
-          WorkRequestStatus: "",
-          ScheduleSiteVisitDate: null,
-          OnsiteSiteVisitDate: null,
-          ScheduleStatus: "",
-          OnSiteStatus: "",
-          ClosureStatus: "",
-          LastUpdatedDate: "2025-03-26T16:33:00.2693047",
-        },
-      ],
-      isLoading: false,
+      ePermitsData:{
+        ePermitsData :   [
+          {
+            Id: "8505b2eb-7826-417d-841a-9f590773b847",
+            PtwId: "000003159",
+            AtwId: "",
+            Status: "InProgress",
+            Vendor: "1call propert maintenance",
+            Customer: "Onboarding Test",
+            Contract: "Onboarding Test",
+            Site: "Building One",
+            Permit: "Electrical Work Permit",
+            PermitType: "Digital",
+            PermitDisplayText: "",
+            PermitTypeDisplayText: "",
+            Permits: "",
+            StartDate: "2025-03-26T16:32:02.8986537",
+            StartTime: null,
+            EndTime: null,
+            WorkRequestId: "00000000-0000-0000-0000-000000000000",
+            WorkRequestType: "",
+            WorkRequestStatus: "",
+            ScheduleSiteVisitDate: null,
+            OnsiteSiteVisitDate: null,
+            ScheduleStatus: "",
+            OnSiteStatus: "",
+            ClosureStatus: "",
+            LastUpdatedDate: "2025-03-26T16:33:00.2693047",
+          },
+          {
+            Id: "f1afd280-6380-4884-982a-465ef0ccf4b4",
+            PtwId: "000003157",
+            AtwId: "",
+            Status: "InProgress",
+            Vendor: "1call propert maintenance",
+            Customer: "Onboarding Test",
+            Contract: "Onboarding Test",
+            Site: "Building One",
+            Permit: "Electrical Work Permit ",
+            PermitType: "Printed",
+            PermitDisplayText: "",
+            PermitTypeDisplayText: "",
+            Permits: "",
+            StartDate: "2025-03-26T16:18:07.3280049",
+            StartTime: null,
+            EndTime: null,
+            WorkRequestId: "00000000-0000-0000-0000-000000000000",
+            WorkRequestType: "",
+            WorkRequestStatus: "",
+            ScheduleSiteVisitDate: null,
+            OnsiteSiteVisitDate: null,
+            ScheduleStatus: "",
+            OnSiteStatus: "",
+            ClosureStatus: "",
+            LastUpdatedDate: "2025-03-26T16:19:18.864039",
+          },
+          {
+            Id: "8505b2eb-7826-417d-841a-9f590773b847",
+            PtwId: "000003159",
+            AtwId: "",
+            Status: "InProgress",
+            Vendor: "1call propert maintenance",
+            Customer: "Onboarding Test",
+            Contract: "Onboarding Test",
+            Site: "Building One",
+            Permit: "Electrical Work Permit",
+            PermitType: "Digital",
+            PermitDisplayText: "",
+            PermitTypeDisplayText: "",
+            Permits: "",
+            StartDate: "2025-03-26T16:32:02.8986537",
+            StartTime: null,
+            EndTime: null,
+            WorkRequestId: "00000000-0000-0000-0000-000000000000",
+            WorkRequestType: "",
+            WorkRequestStatus: "",
+            ScheduleSiteVisitDate: null,
+            OnsiteSiteVisitDate: null,
+            ScheduleStatus: "",
+            OnSiteStatus: "",
+            ClosureStatus: "",
+            LastUpdatedDate: "2025-03-26T16:33:00.2693047",
+          },
+        ],
+        isLoading: false
+      }
     };
   },
   [actionTypes.GET_ELOGBOOK_DATA]: (
@@ -344,7 +349,10 @@ const handlers: {
   ): SearchState => {
     return {
       ...state,
-      isLoading: true,
+      elogBooksData:{
+        elogBooksData: [],
+        isLoading: true,
+      }
     };
   },
 
@@ -354,8 +362,10 @@ const handlers: {
   ): SearchState => {
     return {
       ...state,
-      elogBooksData: payload[0].recommendations,
-      isLoading: false,
+      elogBooksData:{
+        elogBooksData: payload[0].recommendations,
+        isLoading: false,
+      }
     };
   },
   [actionTypes.GET_WEQUOTE_DATA]: (
@@ -364,7 +374,10 @@ const handlers: {
   ): SearchState => {
     return {
       ...state,
-      isLoading: true,
+      webQuotesData:{
+        webQuotesData: [],
+        isLoading: true,
+      }
     };
   },
   [actionTypes.GET_WEQUOTE_DATA_SUCCESS]: (
@@ -373,8 +386,10 @@ const handlers: {
   ): SearchState => {
     return {
       ...state,
-      webQuotesData: payload,
-      isLoading: false,
+      webQuotesData: {
+        webQuotesData:payload,
+        isLoading: false,
+      }
     };
   },
 };

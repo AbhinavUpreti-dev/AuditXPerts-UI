@@ -1,4 +1,7 @@
-import { defaultLoadingState, BaseLoadingState } from "../../../state/base-state.ts";
+import {
+  defaultLoadingState,
+  BaseLoadingState,
+} from "../../../state/base-state.ts";
 import { SearchResponseData } from "./model";
 
 export interface SearchState extends BaseLoadingState {
@@ -9,9 +12,19 @@ export interface SearchState extends BaseLoadingState {
   auditActionItems?: any;
   searchText?: string;
   auditInsight?: any;
-  elogBooksData?: any;
-  ePermitsData?: any;
-  webQuotesData?: any;
+  elogBooksData?: {
+    elogBooksData: any;
+    isLoading: boolean;
+  };
+
+  ePermitsData?: {
+    ePermitsData: any;
+    isLoading: boolean;
+  };
+  webQuotesData?: {
+    webQuotesData: any;
+    isLoading: boolean;
+  };
   isLoading: boolean;
   auditeInsiteIFMHub?: any;
   [key: string]: any;
@@ -75,47 +88,47 @@ export const defaultSearchState: SearchState = {
     continuationToken: "",
     inputParameters: "",
     results: [],
-    showHierarchyMessage:false
+    showHierarchyMessage: false,
   },
   businessSegment: {
     isLoading: false,
-    dropDownOption:[]
+    dropDownOption: [],
   },
-  subBusinessSegment:  {
+  subBusinessSegment: {
     isLoading: false,
-    dropDownOption:[]
+    dropDownOption: [],
   },
-  region:  {
+  region: {
     isLoading: false,
-    dropDownOption:[]
+    dropDownOption: [],
   },
-  country:  {
+  country: {
     isLoading: false,
-    dropDownOption:[]
+    dropDownOption: [],
   },
-  division:  {
+  division: {
     isLoading: false,
-    dropDownOption:[]
+    dropDownOption: [],
   },
-  managingOffice:  {
+  managingOffice: {
     isLoading: false,
-    dropDownOption:[]
+    dropDownOption: [],
   },
   client: {
     isLoading: false,
-    dropDownOption:[]
+    dropDownOption: [],
   },
-  location:  {
+  location: {
     isLoading: false,
-    dropDownOption:[]
+    dropDownOption: [],
   },
-  clientCode:  {
+  clientCode: {
     isLoading: false,
-    dropDownOption:[]
+    dropDownOption: [],
   },
-  locationCode:  {
+  locationCode: {
     isLoading: false,
-    dropDownOption:[]
+    dropDownOption: [],
   },
-  hideHierarchyMessage: false
+  hideHierarchyMessage: false,
 };

@@ -167,6 +167,17 @@
         font-size: 30px;
         font-weight: 600;
     }
+    .header-main{
+
+    
+      display: flex;
+      justify-content: space-between;
+      .material-symbols-outlined{
+        font-size: 40px;
+        font-weight: 600;
+    }
+  }
+    
     .header{
         font-size: 20px;
         margin-bottom: 1rem;
@@ -249,4 +260,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .duration{
+    justify-content: left !important;
+    margin-left: 6rem;
+    margin-top: 2rem;
+  }
+
+  .score{
+    display: flex;
+    justify-content: space-between;
+    &-progress{
+      width: 25%;
+    margin-bottom: 5rem;
+    margin-right: -2rem;
+    }
+  }
+
+  h5{
+    width: 20rem;
   }
