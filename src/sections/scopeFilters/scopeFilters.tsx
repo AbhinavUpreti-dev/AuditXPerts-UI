@@ -965,7 +965,7 @@ export const ScopeFiltersComponent: React.FC<
       case SectionType.AuditSummary:
         return "Generate Site Summary";
       case SectionType.AuditSiteInsights:
-        return "Generate Audit Insight";
+        return "Generate Insight";
       case SectionType.Recommendation:
         return "Generate Recommendation";
       default:
