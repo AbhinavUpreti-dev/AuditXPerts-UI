@@ -1426,29 +1426,33 @@ export const ScopeFiltersComponent: React.FC<
               <>
                 {props.ePermitsData && props.ePermitsData.length > 0 && (
                   <>
-                    <h3>ePermits </h3>
-                    <Table striped>
-                      <thead>
-                        <tr>
-                          <th>Permit</th>
-                          <th>Permit Type</th>
-                          <th>Status</th>
-                          <th>Vendoe</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {props.ePermitsData?.map((item: any) => {
-                          return (
+                    <Card>
+                      <CardBody>
+                        <h3>ePermits </h3>
+                        <Table striped>
+                          <thead>
                             <tr>
-                              <td>{item.Permit}</td>
-                              <td>{item.PermitType}</td>
-                              <td>{item.Status}</td>
-                              <td>{item.Vendor}</td>
+                              <th>Permit</th>
+                              <th>Permit Type</th>
+                              <th>Status</th>
+                              <th>Vendoe</th>
                             </tr>
-                          );
-                        })}
-                      </tbody>
-                    </Table>
+                          </thead>
+                          <tbody>
+                            {props.ePermitsData?.map((item: any) => {
+                              return (
+                                <tr>
+                                  <td>{item.Permit}</td>
+                                  <td>{item.PermitType}</td>
+                                  <td>{item.Status}</td>
+                                  <td>{item.Vendor}</td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </Table>
+                      </CardBody>
+                    </Card>
                   </>
                 )}
               </>
@@ -1458,31 +1462,35 @@ export const ScopeFiltersComponent: React.FC<
               <>
                 {props.webQuotesData && props.webQuotesData.length > 0 && (
                   <>
-                    <h3>WebQuote </h3>
-                    <Table striped>
-                      <thead>
-                        <tr>
-                          <th>Category</th>
-                          <th>Group Description</th>
-                          <th>SubGroup Description</th>
-                          <th>Status</th>
-                          <th>Description</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {props.webQuotesData?.map((item: any) => {
-                          return (
+                    <Card>
+                      <CardBody>
+                        <h3>WebQuote </h3>
+                        <Table striped>
+                          <thead>
                             <tr>
-                              <td>{item.category}</td>
-                              <td>{item.groupDescription || "NA"}</td>
-                              <td>{item.subGroupDescription || "NA"}</td>
-                              <td>{item.status}</td>
-                              <td>{item.description}</td>
+                              <th>Category</th>
+                              <th>Group Description</th>
+                              <th>SubGroup Description</th>
+                              <th>Status</th>
+                              <th>Description</th>
                             </tr>
-                          );
-                        })}
-                      </tbody>
-                    </Table>
+                          </thead>
+                          <tbody>
+                            {props.webQuotesData?.map((item: any) => {
+                              return (
+                                <tr>
+                                  <td>{item.category}</td>
+                                  <td>{item.groupDescription || "NA"}</td>
+                                  <td>{item.subGroupDescription || "NA"}</td>
+                                  <td>{item.status}</td>
+                                  <td>{item.description}</td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </Table>
+                      </CardBody>
+                    </Card>
                   </>
                 )}
               </>
@@ -1490,8 +1498,12 @@ export const ScopeFiltersComponent: React.FC<
 
             {projectName.includes(ProjectName.elogBooks) && (
               <>
-                <h3>elogBooks</h3>
-                <ReactMarkdown>{props.elogBooksData}</ReactMarkdown>
+                <Card>
+                  <CardBody>
+                    <h3>elogBooks</h3>
+                    <ReactMarkdown>{props.elogBooksData}</ReactMarkdown>
+                  </CardBody>
+                </Card>
               </>
             )}
           </>
@@ -1503,26 +1515,43 @@ export const ScopeFiltersComponent: React.FC<
         ) {
           return (
             <>
-              <h3>Harbour Summary</h3>
-              <ReactMarkdown>{props.auditInsight}</ReactMarkdown>
+              <Card>
+                <CardBody>
+                  <h3>Harbour Summary</h3>
+                  <ReactMarkdown>{props.auditInsight}</ReactMarkdown>
+                </CardBody>
+              </Card>
+
               {/* <ReactMarkdown>{props.incidentInsight}</ReactMarkdown> */}
-              <h3>IFM hub Summary</h3>
-              <ReactMarkdown>{props.ifmHubInsight}</ReactMarkdown>
+              <Card>
+                <CardBody>
+                  <h3>IFM hub Summary</h3>
+                  <ReactMarkdown>{props.ifmHubInsight}</ReactMarkdown>
+                </CardBody>
+              </Card>
             </>
           );
         } else if (insightProjectName.includes(ProjectNameInsight.IFMhub)) {
           return (
             <>
-              <h3>IFM hub Summary</h3>
-              <ReactMarkdown>{props.ifmHubInsight}</ReactMarkdown>
+              <Card>
+                <CardBody>
+                  <h3>IFM hub Summary</h3>
+                  <ReactMarkdown>{props.ifmHubInsight}</ReactMarkdown>
+                </CardBody>
+              </Card>
             </>
           );
         } else if (insightProjectName.includes(ProjectNameInsight.harBour)) {
           return (
             <>
-              <h3>Harbour Summary</h3>
-              <ReactMarkdown>{props.auditInsight}</ReactMarkdown>
-              <ReactMarkdown>{props.incidentInsight}</ReactMarkdown>
+              <Card>
+                <CardBody>
+                  <h3>Harbour Summary</h3>
+                  <ReactMarkdown>{props.auditInsight}</ReactMarkdown>
+                  <ReactMarkdown>{props.incidentInsight}</ReactMarkdown>
+                </CardBody>
+              </Card>
             </>
           );
         }
@@ -1657,7 +1686,9 @@ export const ScopeFiltersComponent: React.FC<
               </span>
             </div>
             {props.isLoading ? (
-              <div className="spinner"><Spinner></Spinner></div>
+              <div className="spinner">
+                <Spinner></Spinner>
+              </div>
             ) : (
               <>{renderMarkDown()}</>
             )}
