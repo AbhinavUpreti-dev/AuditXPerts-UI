@@ -1436,7 +1436,7 @@ export const ScopeFiltersComponent: React.FC<
                               <th>Permit</th>
                               <th>Permit Type</th>
                               <th>Status</th>
-                              <th>Vendoe</th>
+                              <th>Vendor</th>
                             </tr>
                           </thead>
                           <tbody>

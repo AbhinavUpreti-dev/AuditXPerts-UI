@@ -8,10 +8,13 @@ import { makeFirstLetterLowercase } from "../text-helper.ts";
 const handlers: {
   [key: string]: (state: SearchState, payload: any) => SearchState;
 } = {
-  [actionTypes.FETCH_SEARCH_RESULT]: (state: SearchState,payload:any): SearchState => {
+  [actionTypes.FETCH_SEARCH_RESULT]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
     return {
       ...state,
-      isLoading: payload.continuationToken ? false:true,
+      isLoading: payload.continuationToken ? false : true,
     };
   },
   [actionTypes.FETCH_SEARCH_RESULT_SUCCESS]: (
@@ -25,15 +28,16 @@ const handlers: {
     };
   },
   [actionTypes.FETCH_SEARCH_RESULT_FAILED]: (
-    state: SearchState,
+    state: SearchState
   ): SearchState => {
     return {
       ...state,
       isLoading: false,
       searchResponseData: {
-        results: [], continuationToken: "",
+        results: [],
+        continuationToken: "",
         inputParameters: "",
-        showHierarchyMessage: false
+        showHierarchyMessage: false,
       },
     };
   },
@@ -67,8 +71,11 @@ const handlers: {
       ...state,
       [makeFirstLetterLowercase(payload.filterAttribute)]: {
         ...state[makeFirstLetterLowercase(payload.filterAttribute)],
-        dropDownOption:!payload.continuationToken ? [] : state[makeFirstLetterLowercase(payload.filterAttribute)].dropDownOption,
-        isLoading: true
+        dropDownOption: !payload.continuationToken
+          ? []
+          : state[makeFirstLetterLowercase(payload.filterAttribute)]
+              .dropDownOption,
+        isLoading: true,
       },
     };
   },
@@ -125,125 +132,251 @@ const handlers: {
       },
     };
   },
-  [actionTypes.HIDE_HIERARCHY_MESSAGE]: (state: SearchState, payload: any): SearchState => {
+  [actionTypes.HIDE_HIERARCHY_MESSAGE]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
     return {
       ...state,
-      hideHierarchyMessage: payload
-    };
-  },
-    
-  [actionTypes.GET_AUDIT_DATA]: (state: SearchState, payload: any): SearchState => {
-    return {
-      ...state,
-      isLoading:true,
+      hideHierarchyMessage: payload,
     };
   },
 
-  
-  [actionTypes.GET_AUDIT_DATA_SUCCESS]: (state: SearchState, payload: any): SearchState => {
+  [actionTypes.GET_AUDIT_DATA]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  },
+
+  [actionTypes.GET_AUDIT_DATA_SUCCESS]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
     return {
       ...state,
       auditSummary: payload.auditSummary,
       incidentSummary: payload.incidentSummary,
-      isLoading:false,
+      isLoading: false,
     };
   },
 
-  [actionTypes.GET_AUDIT_ACTION_ITEMS]: (state: SearchState, payload: any): SearchState => {
+  [actionTypes.GET_AUDIT_ACTION_ITEMS]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
     return {
       ...state,
-      isLoading:true
+      isLoading: true,
     };
   },
 
-  [actionTypes.GET_AUDIT_ACTION_ITEMS_SUCCESS]: (state: SearchState, payload: any): SearchState => {
+  [actionTypes.GET_AUDIT_ACTION_ITEMS_SUCCESS]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
     return {
       ...state,
-      isLoading:false,
+      isLoading: false,
       auditActionItems: payload?.auditActionsSummary,
-     
     };
   },
 
-  [actionTypes.GET_AUDIT_INSIGHT]: (state: SearchState, payload: any): SearchState => {
+  [actionTypes.GET_AUDIT_INSIGHT]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
     return {
       ...state,
-      isLoading:true,
+      isLoading: true,
     };
   },
 
-  [actionTypes.GET_AUDIT_INSIGHT_SUCCESS]: (state: SearchState, payload: any): SearchState => {
+  [actionTypes.GET_AUDIT_INSIGHT_SUCCESS]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
     return {
       ...state,
       auditInsight: payload.response.auditSummary,
       incidentInsight: payload.response.incidentSummary,
-      isLoading:false,
+      isLoading: false,
     };
   },
 
-  
-  [actionTypes.GET_IFMHub_INSIGHT_SUCCESS]: (state: SearchState, payload: any): SearchState => {
+  [actionTypes.GET_IFMHub_INSIGHT_SUCCESS]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
     return {
       ...state,
       ifmHubInsight: payload.response.ifmHubSummary,
-      isLoading:false,
-     
+      isLoading: false,
     };
   },
-  [actionTypes.GET_RECOMMENDATION]: (state: SearchState, payload: any): SearchState => {
+  [actionTypes.GET_RECOMMENDATION]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
     return {
       ...state,
-      recommendations: '',
-      isLoading:true,
+      recommendations: "",
+      isLoading: true,
     };
   },
-  [actionTypes.GET_RECOMMENDATION_SUCCESS]: (state: SearchState, payload: any): SearchState => {
+  [actionTypes.GET_RECOMMENDATION_SUCCESS]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
     return {
       ...state,
       recommendations: payload[0].recommendations,
-      isLoading:false,
+      isLoading: false,
     };
   },
-  [actionTypes.GET_EPERMIT_DATA]: (state: SearchState, payload: any): SearchState => {
+  [actionTypes.GET_EPERMIT_DATA]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
     return {
       ...state,
-     isLoading:true,
+      isLoading: true,
     };
   },
-  [actionTypes.GET_EPERMIT_DATA_SUCCESS]: (state: SearchState, payload: any): SearchState => {
+  [actionTypes.GET_EPERMIT_DATA_SUCCESS]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
     return {
       ...state,
-      ePermitsData: payload.Value.Items,
-      isLoading:false,
+      ePermitsData: [
+        {
+          Id: "8505b2eb-7826-417d-841a-9f590773b847",
+          PtwId: "000003159",
+          AtwId: "",
+          Status: "InProgress",
+          Vendor: "1call propert maintenance",
+          Customer: "Onboarding Test",
+          Contract: "Onboarding Test",
+          Site: "Building One",
+          Permit: "Electrical Work Permit",
+          PermitType: "Digital",
+          PermitDisplayText: "",
+          PermitTypeDisplayText: "",
+          Permits: "",
+          StartDate: "2025-03-26T16:32:02.8986537",
+          StartTime: null,
+          EndTime: null,
+          WorkRequestId: "00000000-0000-0000-0000-000000000000",
+          WorkRequestType: "",
+          WorkRequestStatus: "",
+          ScheduleSiteVisitDate: null,
+          OnsiteSiteVisitDate: null,
+          ScheduleStatus: "",
+          OnSiteStatus: "",
+          ClosureStatus: "",
+          LastUpdatedDate: "2025-03-26T16:33:00.2693047",
+        },
+        {
+          Id: "f1afd280-6380-4884-982a-465ef0ccf4b4",
+          PtwId: "000003157",
+          AtwId: "",
+          Status: "InProgress",
+          Vendor: "1call propert maintenance",
+          Customer: "Onboarding Test",
+          Contract: "Onboarding Test",
+          Site: "Building One",
+          Permit: "Electrical Work Permit ",
+          PermitType: "Printed",
+          PermitDisplayText: "",
+          PermitTypeDisplayText: "",
+          Permits: "",
+          StartDate: "2025-03-26T16:18:07.3280049",
+          StartTime: null,
+          EndTime: null,
+          WorkRequestId: "00000000-0000-0000-0000-000000000000",
+          WorkRequestType: "",
+          WorkRequestStatus: "",
+          ScheduleSiteVisitDate: null,
+          OnsiteSiteVisitDate: null,
+          ScheduleStatus: "",
+          OnSiteStatus: "",
+          ClosureStatus: "",
+          LastUpdatedDate: "2025-03-26T16:19:18.864039",
+        },
+        {
+          Id: "8505b2eb-7826-417d-841a-9f590773b847",
+          PtwId: "000003159",
+          AtwId: "",
+          Status: "InProgress",
+          Vendor: "1call propert maintenance",
+          Customer: "Onboarding Test",
+          Contract: "Onboarding Test",
+          Site: "Building One",
+          Permit: "Electrical Work Permit",
+          PermitType: "Digital",
+          PermitDisplayText: "",
+          PermitTypeDisplayText: "",
+          Permits: "",
+          StartDate: "2025-03-26T16:32:02.8986537",
+          StartTime: null,
+          EndTime: null,
+          WorkRequestId: "00000000-0000-0000-0000-000000000000",
+          WorkRequestType: "",
+          WorkRequestStatus: "",
+          ScheduleSiteVisitDate: null,
+          OnsiteSiteVisitDate: null,
+          ScheduleStatus: "",
+          OnSiteStatus: "",
+          ClosureStatus: "",
+          LastUpdatedDate: "2025-03-26T16:33:00.2693047",
+        },
+      ],
+      isLoading: false,
     };
   },
-  [actionTypes.GET_ELOGBOOK_DATA]: (state: SearchState, payload: any): SearchState => {
+  [actionTypes.GET_ELOGBOOK_DATA]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
     return {
       ...state,
-    isLoading:true,
+      isLoading: true,
     };
   },
 
-  [actionTypes.GET_ELOGBOOK_DATA_SUCCESS]: (state: SearchState, payload: any): SearchState => {
+  [actionTypes.GET_ELOGBOOK_DATA_SUCCESS]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
     return {
       ...state,
       elogBooksData: payload[0].recommendations,
-      isLoading:false,
+      isLoading: false,
     };
   },
-  [actionTypes.GET_WEQUOTE_DATA]: (state: SearchState, payload: any): SearchState => {
+  [actionTypes.GET_WEQUOTE_DATA]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
     return {
       ...state,
-      isLoading:true
+      isLoading: true,
     };
   },
-  [actionTypes.GET_WEQUOTE_DATA_SUCCESS]: (state: SearchState, payload: any): SearchState => {
+  [actionTypes.GET_WEQUOTE_DATA_SUCCESS]: (
+    state: SearchState,
+    payload: any
+  ): SearchState => {
     return {
       ...state,
       webQuotesData: payload,
-      isLoading:false
+      isLoading: false,
     };
-  }
+  },
 };
 
 const SearchReducer = (
