@@ -243,7 +243,10 @@ const handlers: {
   ): SearchState => {
     return {
       ...state,
-      isLoading: true,
+     ePermitsData:{
+        ePermitsData: [],
+        isLoading: true
+     }
     };
   },
   [actionTypes.GET_EPERMIT_DATA_SUCCESS]: (

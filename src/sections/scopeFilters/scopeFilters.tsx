@@ -1439,13 +1439,13 @@ export const ScopeFiltersComponent: React.FC<
           <>
             {projectName.includes(ProjectName.ePermits) && (
               <>
-                {props.ePermitsData.isLoading ? (
+                {props.ePermitsData?.isLoading ? (
                      <div className="spinner">
                      <Spinner></Spinner>
                    </div>
                 ) : (
                   <>
-                    {props.ePermitsData.ePermitsData && props.ePermitsData.ePermitsData.length > 0 && (
+                    {props.ePermitsData?.ePermitsData && props.ePermitsData?.ePermitsData.length > 0 && (
                       <>
                         <Card>
                           <CardBody>
@@ -1483,14 +1483,14 @@ export const ScopeFiltersComponent: React.FC<
 
             {projectName.includes(ProjectName.webQuote) && (
               <>
-                {props.webQuotesData.isLoading ? (
+                {props.webQuotesData?.isLoading ? (
                       <div className="spinner">
                       <Spinner></Spinner>
                     </div>
                 ) : (
                   <>
-                    {props.webQuotesData.webQuotesData &&
-                      props.webQuotesData.webQuotesData.length > 0 && (
+                    {props.webQuotesData?.webQuotesData &&
+                      props.webQuotesData?.webQuotesData.length > 0 && (
                         <>
                           <Card>
                             <CardBody>
@@ -1506,7 +1506,7 @@ export const ScopeFiltersComponent: React.FC<
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {props.webQuotesData.webQuotesData?.map(
+                                  {props.webQuotesData?.webQuotesData?.map(
                                     (item: any) => {
                                       return (
                                         <tr>
@@ -1537,7 +1537,7 @@ export const ScopeFiltersComponent: React.FC<
             {projectName.includes(ProjectName.elogBooks) && (
               <>
                 {" "}
-                {props.elogBooksData.isLoading ? (
+                {props.elogBooksData?.isLoading ? (
                   <div className="spinner">
                     <Spinner></Spinner>
                   </div>
@@ -1547,7 +1547,7 @@ export const ScopeFiltersComponent: React.FC<
                       <CardBody>
                         <h3>elogBooks</h3>
                         <ReactMarkdown>
-                          {props.elogBooksData.elogBooksData}
+                          {props.elogBooksData?.elogBooksData}
                         </ReactMarkdown>
                       </CardBody>
                     </Card>
