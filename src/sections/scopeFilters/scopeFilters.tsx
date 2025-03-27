@@ -1165,6 +1165,26 @@ export const ScopeFiltersComponent: React.FC<
           </div>
         </div>
         {getElogbooksDropdowns()}
+
+        <div className="chips duration">
+          <h5>Select Duration</h5>
+          <div
+            className={`chip ${
+              selectedMonth === Months["3Months"] ? "chip-selected" : ""
+            }`}
+            onClick={() => getMonths(Months["3Months"])}
+          >
+            <span>3 Months</span>
+          </div>
+          <div
+            className={`chip ${
+              selectedMonth === Months["6Months"] ? "chip-selected" : ""
+            }`}
+            onClick={() => getMonths(Months["6Months"])}
+          >
+            <span>6 Months</span>
+          </div>
+        </div>
       </>
     );
   };
@@ -1195,16 +1215,6 @@ export const ScopeFiltersComponent: React.FC<
           </div>
           <div
             className={`${
-              insightProjectName == ProjectNameInsight.myVintage
-                ? "chip-selected"
-                : ""
-            } chip`}
-            onClick={() => onInsightProjectSelect(ProjectNameInsight.myVintage)}
-          >
-            <span>My Vantage </span>
-          </div>
-          <div
-            className={`${
               insightProjectName == ProjectNameInsight.talentCouch
                 ? "chip-selected"
                 : ""
@@ -1215,6 +1225,17 @@ export const ScopeFiltersComponent: React.FC<
           >
             <span>Talent Coach</span>
           </div>
+          <div
+            className={`${
+              insightProjectName == ProjectNameInsight.myVintage
+                ? "chip-selected"
+                : ""
+            } chip`}
+            onClick={() => onInsightProjectSelect(ProjectNameInsight.myVintage)}
+          >
+            <span>My Vantage </span>
+          </div>
+      
         </div>
         {getFilters()}
 
