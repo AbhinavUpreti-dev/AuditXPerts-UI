@@ -160,10 +160,10 @@ export const getAuditActionItemsSuccess = (response: any): AppAction => {
 }
 
 
-export const getAuditInsightItems = (filters: any, isIFMHub: boolean): AppAction => {
+export const getAuditInsightItems = (filters: any, isIFMHub: boolean,timeline): AppAction => {
   return {
     type: actionTypes.GET_AUDIT_INSIGHT,
-    payload: { filters, isIFMHub }
+    payload: { filters, isIFMHub,timeline}
   }
 }
 

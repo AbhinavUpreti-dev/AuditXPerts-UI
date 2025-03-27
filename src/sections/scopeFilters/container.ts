@@ -69,8 +69,8 @@ const mapDispatchToProps = (dispatch: Dispatch<AppAction>) => {
       dispatch(getRecommendation(filters));
     },
 
-    getAuditInSight(filters, isIFMHub): void {
-      dispatch(getAuditInsightItems(filters, isIFMHub));
+    getAuditInSight(filters, isIFMHub,timeLine): void {
+      dispatch(getAuditInsightItems(filters, isIFMHub,timeLine));
     },
     getePermitsData(filters): void {
       dispatch(getePermitsData(filters));

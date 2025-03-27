@@ -122,7 +122,7 @@ export const getScopeFilterDataApi = (filter:string) =>
         // {
         //   url = `${url}&${queryFilter}`;
         // }
-        return getApi(`https://localhost:7181/api/harbour/getAuditSummary/?${payload.filters}&title=''&isIFMHub=${payload.isIFMHub}`);
+        return getApi(`https://localhost:7181/api/harbour/getAuditSummary/?${payload.filters}&title=''&isIFMHub=${payload.isIFMHub}&timeLine=${payload.timeline}`);
       }
       
       export function* getAuditInsightItems(action: AppAction) {

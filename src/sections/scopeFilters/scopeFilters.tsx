@@ -24,6 +24,7 @@ import {
 } from "reactstrap";
 import FloatingLabelSelect from "../floatingLabelSelect/floatingLabelSelect.tsx";
 import ReactMarkdown from "react-markdown";
+import { months } from "moment-timezone";
 
 let searchApiTrigger: any = null;
 
@@ -53,7 +54,7 @@ export interface ScopeFiltersProps {
   getAuditActionItems(filters: string, title): void;
   auditActionItems: any;
 
-  getAuditInSight(filters: string, isIFMHub: boolean): void;
+  getAuditInSight(filters: string, isIFMHub: boolean,timeLine:any): void;
   auditInsight: any;
   ifmHubInsight: any;
   incidentInsight: any;
@@ -987,10 +988,10 @@ export const ScopeFiltersComponent: React.FC<
     const queryString = buildQueryString(currentFilters);
 
     if (insightProjectName.includes(ProjectNameInsight.harBour)) {
-      props.getAuditInSight(queryString, false);
+      props.getAuditInSight(queryString, false,selectedMonth);
     }
     if (insightProjectName.includes(ProjectNameInsight.IFMhub)) {
-      props.getAuditInSight(queryString, true);
+      props.getAuditInSight(queryString, true,selectedMonth);
     }
   };
 
