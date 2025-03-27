@@ -952,6 +952,7 @@ export const ScopeFiltersComponent: React.FC<
       customerName: customer.value,
       contractName: project.value,
       buildingName: building.value,
+      showFullSummary: true
     };
     const requestWebQuote = {
       clientName: "Santander",
