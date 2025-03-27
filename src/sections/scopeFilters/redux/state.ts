@@ -12,6 +12,7 @@ export interface SearchState extends BaseLoadingState {
   elogBooksData?: any;
   ePermitsData?: any;
   webQuotesData?: any;
+  isLoading: boolean;
   auditeInsiteIFMHub?: any;
   [key: string]: any;
   businessSegment?: {
@@ -69,6 +70,7 @@ export interface SearchState extends BaseLoadingState {
 
 export const defaultSearchState: SearchState = {
   ...defaultLoadingState,
+  isLoading: false,
   searchResponseData: {
     continuationToken: "",
     inputParameters: "",

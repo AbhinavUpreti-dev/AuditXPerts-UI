@@ -131,20 +131,44 @@ const handlers: {
       hideHierarchyMessage: payload
     };
   },
+    
+  [actionTypes.GET_AUDIT_DATA]: (state: SearchState, payload: any): SearchState => {
+    return {
+      ...state,
+      isLoading:true,
+    };
+  },
+
   
   [actionTypes.GET_AUDIT_DATA_SUCCESS]: (state: SearchState, payload: any): SearchState => {
     return {
       ...state,
       auditSummary: payload.auditSummary,
       incidentSummary: payload.incidentSummary,
+      isLoading:false,
+    };
+  },
+
+  [actionTypes.GET_AUDIT_ACTION_ITEMS]: (state: SearchState, payload: any): SearchState => {
+    return {
+      ...state,
+      isLoading:true
     };
   },
 
   [actionTypes.GET_AUDIT_ACTION_ITEMS_SUCCESS]: (state: SearchState, payload: any): SearchState => {
     return {
       ...state,
+      isLoading:false,
       auditActionItems: payload?.auditActionsSummary,
      
+    };
+  },
+
+  [actionTypes.GET_AUDIT_INSIGHT]: (state: SearchState, payload: any): SearchState => {
+    return {
+      ...state,
+      isLoading:true,
     };
   },
 
@@ -153,13 +177,16 @@ const handlers: {
       ...state,
       auditInsight: payload.response.auditSummary,
       incidentInsight: payload.response.incidentSummary,
+      isLoading:false,
     };
   },
 
+  
   [actionTypes.GET_IFMHub_INSIGHT_SUCCESS]: (state: SearchState, payload: any): SearchState => {
     return {
       ...state,
       ifmHubInsight: payload.response.ifmHubSummary,
+      isLoading:false,
      
     };
   },
@@ -167,30 +194,54 @@ const handlers: {
     return {
       ...state,
       recommendations: '',
+      isLoading:true,
     };
   },
   [actionTypes.GET_RECOMMENDATION_SUCCESS]: (state: SearchState, payload: any): SearchState => {
     return {
       ...state,
       recommendations: payload[0].recommendations,
+      isLoading:false,
+    };
+  },
+  [actionTypes.GET_EPERMIT_DATA]: (state: SearchState, payload: any): SearchState => {
+    return {
+      ...state,
+     isLoading:true,
     };
   },
   [actionTypes.GET_EPERMIT_DATA_SUCCESS]: (state: SearchState, payload: any): SearchState => {
     return {
       ...state,
       ePermitsData: payload.Value.Items,
+      isLoading:false,
     };
   },
+  [actionTypes.GET_ELOGBOOK_DATA]: (state: SearchState, payload: any): SearchState => {
+    return {
+      ...state,
+    isLoading:true,
+    };
+  },
+
   [actionTypes.GET_ELOGBOOK_DATA_SUCCESS]: (state: SearchState, payload: any): SearchState => {
     return {
       ...state,
       elogBooksData: payload[0].recommendations,
+      isLoading:false,
+    };
+  },
+  [actionTypes.GET_WEQUOTE_DATA]: (state: SearchState, payload: any): SearchState => {
+    return {
+      ...state,
+      isLoading:true
     };
   },
   [actionTypes.GET_WEQUOTE_DATA_SUCCESS]: (state: SearchState, payload: any): SearchState => {
     return {
       ...state,
       webQuotesData: payload,
+      isLoading:false
     };
   }
 };

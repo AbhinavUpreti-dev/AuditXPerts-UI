@@ -38,6 +38,7 @@ const mapStateToProps = (state: AppState) => {
     ePermitsData: state.searchState.ePermitsData,
     elogBooksData: state.searchState.elogBooksData,
     webQuotesData: state.searchState.webQuotesData,
+    isLoading: state.searchState.isLoading,
   };
 };
 

@@ -13,7 +13,15 @@ import {
 import "./scopeFilters.scss";
 import magicButtom from "./icon/magic button 1.svg";
 
-import { Card, CardBody, CardFooter, Col, Row, Table } from "reactstrap";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  Col,
+  Row,
+  Spinner,
+  Table,
+} from "reactstrap";
 import FloatingLabelSelect from "../floatingLabelSelect/floatingLabelSelect.tsx";
 import ReactMarkdown from "react-markdown";
 
@@ -40,6 +48,7 @@ export interface ScopeFiltersProps {
   auditData: any;
   getRecommendationData(request: any): void;
   recommendations: any;
+  isLoading: boolean;
 
   getAuditActionItems(filters: string, title): void;
   auditActionItems: any;
@@ -937,8 +946,8 @@ export const ScopeFiltersComponent: React.FC<
       Pagination: { Skip: 0, Take: 5 },
       Filters: [
         { FieldName: "Customer", Value: "OnBoarding Test" },
-        { FieldName: "Contract", Value: '' },
-        { FieldName: "Site", Value: '' },
+        { FieldName: "Contract", Value: "" },
+        { FieldName: "Site", Value: "" },
       ],
     };
     const request = {
@@ -947,9 +956,9 @@ export const ScopeFiltersComponent: React.FC<
       buildingName: building.value,
     };
     const requestWebQuote = {
-      clientName: 'Santander',
-      contractReference: 'CA000627.012',
-      locationDescription: 'Aberdeen 171-173 US',
+      clientName: "Santander",
+      contractReference: "CA000627.012",
+      locationDescription: "Aberdeen 171-173 US",
     };
 
     if (projectName.includes(ProjectName.ePermits)) {
@@ -1465,10 +1474,10 @@ export const ScopeFiltersComponent: React.FC<
                           return (
                             <tr>
                               <td>{item.category}</td>
-                              <td>{item.groupDescription || 'NA'}</td>
-                              <td>{item.subGroupDescription || 'NA'}</td>
+                              <td>{item.groupDescription || "NA"}</td>
+                              <td>{item.subGroupDescription || "NA"}</td>
                               <td>{item.status}</td>
-                              <td>{item.description}</td>  
+                              <td>{item.description}</td>
                             </tr>
                           );
                         })}
@@ -1481,48 +1490,48 @@ export const ScopeFiltersComponent: React.FC<
 
             {projectName.includes(ProjectName.elogBooks) && (
               <>
-              <h3>elogBooks</h3>
-              <ReactMarkdown>{props.elogBooksData}</ReactMarkdown>
+                <h3>elogBooks</h3>
+                <ReactMarkdown>{props.elogBooksData}</ReactMarkdown>
               </>
             )}
           </>
         );
       case SectionType.AuditSiteInsights:
-        if(insightProjectName.includes(ProjectNameInsight.harBour) && insightProjectName.includes(ProjectNameInsight.IFMhub)) {
-          return (
-          <>
-          <h3>Harbour Summary</h3>
-          <ReactMarkdown>{props.auditInsight}</ReactMarkdown>
-          {/* <ReactMarkdown>{props.incidentInsight}</ReactMarkdown> */}
-          <h3>IFM hub Summary</h3>
-        <ReactMarkdown>{props.ifmHubInsight}</ReactMarkdown>
-        </>
-        
-          )
-         } 
-         else if(insightProjectName.includes(ProjectNameInsight.IFMhub)) {
+        if (
+          insightProjectName.includes(ProjectNameInsight.harBour) &&
+          insightProjectName.includes(ProjectNameInsight.IFMhub)
+        ) {
           return (
             <>
-            <h3>IFM hub Summary</h3>
-          <ReactMarkdown>{props.ifmHubInsight}</ReactMarkdown>
-          </>
-          )
-        }
-        else if(insightProjectName.includes(ProjectNameInsight.harBour)) {
+              <h3>Harbour Summary</h3>
+              <ReactMarkdown>{props.auditInsight}</ReactMarkdown>
+              {/* <ReactMarkdown>{props.incidentInsight}</ReactMarkdown> */}
+              <h3>IFM hub Summary</h3>
+              <ReactMarkdown>{props.ifmHubInsight}</ReactMarkdown>
+            </>
+          );
+        } else if (insightProjectName.includes(ProjectNameInsight.IFMhub)) {
           return (
             <>
-            <h3>Harbour Summary</h3>
-            <ReactMarkdown>{props.auditInsight}</ReactMarkdown>
-            <ReactMarkdown>{props.incidentInsight}</ReactMarkdown>
-          </>
-          )
+              <h3>IFM hub Summary</h3>
+              <ReactMarkdown>{props.ifmHubInsight}</ReactMarkdown>
+            </>
+          );
+        } else if (insightProjectName.includes(ProjectNameInsight.harBour)) {
+          return (
+            <>
+              <h3>Harbour Summary</h3>
+              <ReactMarkdown>{props.auditInsight}</ReactMarkdown>
+              <ReactMarkdown>{props.incidentInsight}</ReactMarkdown>
+            </>
+          );
         }
-        
+
       case SectionType.Recommendation:
         return <ReactMarkdown>{props.recommendations}</ReactMarkdown>;
     }
   };
-  
+
   return (
     <>
       {
@@ -1647,7 +1656,11 @@ export const ScopeFiltersComponent: React.FC<
                 <strong>AI Generated</strong>
               </span>
             </div>
-            {renderMarkDown()}
+            {props.isLoading ? (
+              <div className="spinner"><Spinner></Spinner></div>
+            ) : (
+              <>{renderMarkDown()}</>
+            )}
           </CardBody>
         </Card>
       </section>
