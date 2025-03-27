@@ -54,7 +54,7 @@ export interface ScopeFiltersProps {
   getAuditActionItems(filters: string, title): void;
   auditActionItems: any;
 
-  getAuditInSight(filters: string, isIFMHub: boolean,timeLine:any): void;
+  getAuditInSight(filters: string, isIFMHub: boolean, timeLine: any): void;
   auditInsight: any;
   ifmHubInsight: any;
   incidentInsight: any;
@@ -839,7 +839,7 @@ export const ScopeFiltersComponent: React.FC<
             filterOption={() => {
               return true;
             }}
-            label={"Project/Contaract"}
+            label={"Project/Contract"}
           />
         </Col>
         <Col xs={6} md={3} lg={3}>
@@ -928,15 +928,15 @@ export const ScopeFiltersComponent: React.FC<
   const getLabel = () => {
     switch (sectionTypes) {
       case SectionType.AuditAction:
-        return "Audit Action Items";
+        return "Generate Audit Action";
       case SectionType.AuditSummary:
-        return "Site Summary";
+        return "Generate Site Summary";
       case SectionType.AuditSiteInsights:
-        return "Audit Insights";
+        return "Generate Audit Insight";
       case SectionType.Recommendation:
-        return "Recommendations";
+        return "Generate Recommendation";
       default:
-        return "Audit Action Items";
+        return "Audit Action";
     }
   };
   const getAuditSummury = () => {
@@ -985,10 +985,10 @@ export const ScopeFiltersComponent: React.FC<
     const queryString = buildQueryString(currentFilters);
 
     if (insightProjectName.includes(ProjectNameInsight.harBour)) {
-      props.getAuditInSight(queryString, false,selectedMonth);
+      props.getAuditInSight(queryString, false, selectedMonth);
     }
     if (insightProjectName.includes(ProjectNameInsight.IFMhub)) {
-      props.getAuditInSight(queryString, true,selectedMonth);
+      props.getAuditInSight(queryString, true, selectedMonth);
     }
   };
 
@@ -1175,16 +1175,17 @@ export const ScopeFiltersComponent: React.FC<
                 ? "chip-selected"
                 : ""
             } chip`}
-            onClick={() => onInsightProjectSelect(ProjectNameInsight.talentCouch)}
+            onClick={() =>
+              onInsightProjectSelect(ProjectNameInsight.talentCouch)
+            }
           >
             <span>Talent Coach</span>
           </div>
-
         </div>
         {getFilters()}
 
-        <div className="chips">
-          <h4>Get Audit Insight for</h4>
+        <div className="chips duration">
+          <h5>Select Duration</h5>
           <div
             className={`chip ${
               selectedMonth === Months["3Months"] ? "chip-selected" : ""
@@ -1437,35 +1438,43 @@ export const ScopeFiltersComponent: React.FC<
           <>
             {projectName.includes(ProjectName.ePermits) && (
               <>
-                {props.ePermitsData && props.ePermitsData.length > 0 && (
+                {props.ePermitsData.isLoading ? (
+                     <div className="spinner">
+                     <Spinner></Spinner>
+                   </div>
+                ) : (
                   <>
-                    <Card>
-                      <CardBody>
-                        <h3>ePermits </h3>
-                        <Table striped>
-                          <thead>
-                            <tr>
-                              <th>Permit Name</th>
-                              <th>Permit Type</th>
-                              <th>Status</th>
-                              <th>Vendor</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {props.ePermitsData?.map((item: any) => {
-                              return (
+                    {props.ePermitsData.ePermitsData && props.ePermitsData.ePermitsData.length > 0 && (
+                      <>
+                        <Card>
+                          <CardBody>
+                            <h3>ePermits </h3>
+                            <Table striped>
+                              <thead>
                                 <tr>
-                                  <td>{item.Permit}</td>
-                                  <td>{item.PermitType}</td>
-                                  <td>{item.Status}</td>
-                                  <td>{item.Vendor}</td>
+                                  <th>Permit Name</th>
+                                  <th>Permit Type</th>
+                                  <th>Status</th>
+                                  <th>Vendor</th>
                                 </tr>
-                              );
-                            })}
-                          </tbody>
-                        </Table>
-                      </CardBody>
-                    </Card>
+                              </thead>
+                              <tbody>
+                                {props.ePermitsData?.map((item: any) => {
+                                  return (
+                                    <tr>
+                                      <td>{item.Permit}</td>
+                                      <td>{item.PermitType}</td>
+                                      <td>{item.Status}</td>
+                                      <td>{item.Vendor}</td>
+                                    </tr>
+                                  );
+                                })}
+                              </tbody>
+                            </Table>
+                          </CardBody>
+                        </Card>
+                      </>
+                    )}
                   </>
                 )}
               </>
@@ -1473,37 +1482,52 @@ export const ScopeFiltersComponent: React.FC<
 
             {projectName.includes(ProjectName.webQuote) && (
               <>
-                {props.webQuotesData && props.webQuotesData.length > 0 && (
+                {props.webQuotesData.isLoading ? (
+                      <div className="spinner">
+                      <Spinner></Spinner>
+                    </div>
+                ) : (
                   <>
-                    <Card>
-                      <CardBody>
-                        <h3>WebQuote </h3>
-                        <Table striped>
-                          <thead>
-                            <tr>
-                              <th>Category</th>
-                              <th>Group Description</th>
-                              <th>SubGroup Description</th>
-                              <th>Status</th>
-                              <th>Description</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {props.webQuotesData?.map((item: any) => {
-                              return (
-                                <tr>
-                                  <td>{item.category}</td>
-                                  <td>{item.groupDescription || "NA"}</td>
-                                  <td>{item.subGroupDescription || "NA"}</td>
-                                  <td>{item.status}</td>
-                                  <td>{item.description}</td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </Table>
-                      </CardBody>
-                    </Card>
+                    {props.webQuotesData.webQuotesData &&
+                      props.webQuotesData.webQuotesData.length > 0 && (
+                        <>
+                          <Card>
+                            <CardBody>
+                              <h3>WebQuote </h3>
+                              <Table striped>
+                                <thead>
+                                  <tr>
+                                    <th>Category</th>
+                                    <th>Group Description</th>
+                                    <th>SubGroup Description</th>
+                                    <th>Status</th>
+                                    <th>Description</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {props.webQuotesData.webQuotesData?.map(
+                                    (item: any) => {
+                                      return (
+                                        <tr>
+                                          <td>{item.category}</td>
+                                          <td>
+                                            {item.groupDescription || "NA"}
+                                          </td>
+                                          <td>
+                                            {item.subGroupDescription || "NA"}
+                                          </td>
+                                          <td>{item.status}</td>
+                                          <td>{item.description}</td>
+                                        </tr>
+                                      );
+                                    }
+                                  )}
+                                </tbody>
+                              </Table>
+                            </CardBody>
+                          </Card>
+                        </>
+                      )}
                   </>
                 )}
               </>
@@ -1511,12 +1535,23 @@ export const ScopeFiltersComponent: React.FC<
 
             {projectName.includes(ProjectName.elogBooks) && (
               <>
-                <Card>
-                  <CardBody>
-                    <h3>elogBooks</h3>
-                    <ReactMarkdown>{props.elogBooksData}</ReactMarkdown>
-                  </CardBody>
-                </Card>
+                {" "}
+                {props.elogBooksData.isLoading ? (
+                  <div className="spinner">
+                    <Spinner></Spinner>
+                  </div>
+                ) : (
+                  <>
+                    <Card>
+                      <CardBody>
+                        <h3>elogBooks</h3>
+                        <ReactMarkdown>
+                          {props.elogBooksData.elogBooksData}
+                        </ReactMarkdown>
+                      </CardBody>
+                    </Card>
+                  </>
+                )}
               </>
             )}
           </>
@@ -1583,17 +1618,17 @@ export const ScopeFiltersComponent: React.FC<
               <>
                 <div>
                   <span>
-                    <span
+                    {/* <span
                       className={`material-symbols-outlined`}
                       // onClick={() => {
                       //   onAddDate();
                       // }}
                     >
                       {"search"}
-                    </span>
+                    </span> */}
                   </span>
                   <span className="header">
-                    <strong>Search</strong>
+                    <strong>Audit & Compliance Platform</strong>
                   </span>
                 </div>
                 {/* <FloatingLabelSelect
@@ -1630,7 +1665,7 @@ export const ScopeFiltersComponent: React.FC<
                     }`}
                     onClick={() => getSection(SectionType.Recommendation)}
                   >
-                    <span>Recommendations</span>
+                    <span>Recommendation</span>
                   </div>
                   <div
                     className={`button-sections ${
@@ -1640,7 +1675,7 @@ export const ScopeFiltersComponent: React.FC<
                     }`}
                     onClick={() => getSection(SectionType.AuditAction)}
                   >
-                    <span>Audit Action Items</span>
+                    <span>Audit Action</span>
                   </div>
                   <div
                     className={`button-sections ${
@@ -1683,19 +1718,29 @@ export const ScopeFiltersComponent: React.FC<
       <section className="markdown">
         <Card>
           <CardBody>
-            <div>
+            <div className="header-main">
               <span>
-                <span
-                  className={`material-symbols-outlined`}
-                  // onClick={() => {
-                  //   onAddDate();
-                  // }}
-                >
-                  <img src={magicButtom} alt="wand_stars" />
+                <span>
+                  <span
+                    className={`material-symbols-outlined`}
+                    // onClick={() => {
+                    //   onAddDate();
+                    // }}
+                  >
+                    <img src={magicButtom} alt="wand_stars" />
+                  </span>
+                </span>
+                <span className="header">
+                  <strong>AI Generated</strong>
                 </span>
               </span>
-              <span className="header">
-                <strong>AI Generated</strong>
+              <span
+                className={`material-symbols-outlined`}
+                // onClick={() => {
+                //   onAddDate();
+                // }}
+              >
+                Download
               </span>
             </div>
             {props.isLoading ? (
