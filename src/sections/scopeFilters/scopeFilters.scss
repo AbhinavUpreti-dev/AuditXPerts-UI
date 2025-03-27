@@ -266,3 +266,17 @@
     margin-left: 6rem;
     margin-top: 2rem;
   }
+
+  .score{
+    display: flex;
+    justify-content: space-between;
+    &-progress{
+      width: 25%;
+    margin-bottom: 5rem;
+    margin-right: -2rem;
+    }
+  }
+
+  h5{
+    width: 20rem;
+  }

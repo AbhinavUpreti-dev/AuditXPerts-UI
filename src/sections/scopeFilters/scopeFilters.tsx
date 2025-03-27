@@ -25,6 +25,7 @@ import {
 import FloatingLabelSelect from "../floatingLabelSelect/floatingLabelSelect.tsx";
 import ReactMarkdown from "react-markdown";
 import { months } from "moment-timezone";
+import ProgressBar from "./progressBar.tsx";
 
 let searchApiTrigger: any = null;
 
@@ -67,6 +68,7 @@ export interface ScopeFiltersProps {
 
   getelogBooksData(filters: any): void;
   elogBooksData: any;
+  talentCoachdata: any;
 }
 
 export const ScopeFiltersComponent: React.FC<
@@ -82,7 +84,7 @@ export const ScopeFiltersComponent: React.FC<
     ProjectName.ePermits,
     ProjectName.elogBooks,
   ]);
-  const [insightProjectName, setInsightProjectName] = React.useState<any>("");
+  const [insightProjectName, setInsightProjectName] = React.useState<any>(ProjectNameInsight.harBour);
 
   const defaultOption = {
     value: "global.dropdown.default",
@@ -952,7 +954,7 @@ export const ScopeFiltersComponent: React.FC<
       customerName: customer.value,
       contractName: project.value,
       buildingName: building.value,
-      showFullSummary: true
+      showFullSummary: true,
     };
     const requestWebQuote = {
       clientName: "Santander",
@@ -1440,42 +1442,43 @@ export const ScopeFiltersComponent: React.FC<
             {projectName.includes(ProjectName.ePermits) && (
               <>
                 {props.ePermitsData?.isLoading ? (
-                     <div className="spinner">
-                     <Spinner></Spinner>
-                   </div>
+                  <div className="spinner">
+                    <Spinner></Spinner>
+                  </div>
                 ) : (
                   <>
-                    {props.ePermitsData?.ePermitsData && props.ePermitsData?.ePermitsData.length > 0 && (
-                      <>
-                        <Card>
-                          <CardBody>
-                            <h3>ePermits </h3>
-                            <Table striped>
-                              <thead>
-                                <tr>
-                                  <th>Permit Name</th>
-                                  <th>Permit Type</th>
-                                  <th>Status</th>
-                                  <th>Vendor</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {props.ePermitsData?.map((item: any) => {
-                                  return (
-                                    <tr>
-                                      <td>{item.Permit}</td>
-                                      <td>{item.PermitType}</td>
-                                      <td>{item.Status}</td>
-                                      <td>{item.Vendor}</td>
-                                    </tr>
-                                  );
-                                })}
-                              </tbody>
-                            </Table>
-                          </CardBody>
-                        </Card>
-                      </>
-                    )}
+                    {props.ePermitsData?.ePermitsData &&
+                      props.ePermitsData?.ePermitsData.length > 0 && (
+                        <>
+                          <Card>
+                            <CardBody>
+                              <h3>ePermits </h3>
+                              <Table striped>
+                                <thead>
+                                  <tr>
+                                    <th>Permit Name</th>
+                                    <th>Permit Type</th>
+                                    <th>Status</th>
+                                    <th>Vendor</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {props.ePermitsData?.map((item: any) => {
+                                    return (
+                                      <tr>
+                                        <td>{item.Permit}</td>
+                                        <td>{item.PermitType}</td>
+                                        <td>{item.Status}</td>
+                                        <td>{item.Vendor}</td>
+                                      </tr>
+                                    );
+                                  })}
+                                </tbody>
+                              </Table>
+                            </CardBody>
+                          </Card>
+                        </>
+                      )}
                   </>
                 )}
               </>
@@ -1484,9 +1487,9 @@ export const ScopeFiltersComponent: React.FC<
             {projectName.includes(ProjectName.webQuote) && (
               <>
                 {props.webQuotesData?.isLoading ? (
-                      <div className="spinner">
-                      <Spinner></Spinner>
-                    </div>
+                  <div className="spinner">
+                    <Spinner></Spinner>
+                  </div>
                 ) : (
                   <>
                     {props.webQuotesData?.webQuotesData &&
@@ -1580,7 +1583,7 @@ export const ScopeFiltersComponent: React.FC<
               </Card>
             </>
           );
-        } else if (insightProjectName.includes(ProjectNameInsight.IFMhub)) {
+        } else if (insightProjectName == ProjectNameInsight.IFMhub) {
           return (
             <>
               <Card>
@@ -1591,7 +1594,7 @@ export const ScopeFiltersComponent: React.FC<
               </Card>
             </>
           );
-        } else if (insightProjectName.includes(ProjectNameInsight.harBour)) {
+        } else if (insightProjectName == ProjectNameInsight.harBour) {
           return (
             <>
               <Card>
@@ -1599,6 +1602,40 @@ export const ScopeFiltersComponent: React.FC<
                   <h3>Harbour Summary</h3>
                   <ReactMarkdown>{props.auditInsight}</ReactMarkdown>
                   <ReactMarkdown>{props.incidentInsight}</ReactMarkdown>
+                </CardBody>
+              </Card>
+            </>
+          );
+        } else if (insightProjectName == ProjectNameInsight.talentCouch) {
+          return (
+            <>
+              <Card>
+                <CardBody>
+                  <div className="score">
+                    <h3>Trainings </h3>
+                    <div className="score-progress"> <ProgressBar /></div>
+                   
+                  </div>
+                  <Table striped>
+                    <thead>
+                      <tr>
+                        <th>Employee Name</th>
+                        <th>Training Name</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {props.talentCoachdata?.map((item: any) => {
+                        return (
+                          <tr>
+                            <td>{item.employeeName}</td>
+                            <td>{item.trainingName}</td>
+                            <td>{item.status}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
                 </CardBody>
               </Card>
             </>
