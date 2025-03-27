@@ -1447,38 +1447,37 @@ export const ScopeFiltersComponent: React.FC<
                   </div>
                 ) : (
                   <>
-                    {props.ePermitsData?.ePermitsData &&
-                      props.ePermitsData?.ePermitsData.length > 0 && (
-                        <>
-                          <Card>
-                            <CardBody>
-                              <h3>ePermits </h3>
-                              <Table striped>
-                                <thead>
-                                  <tr>
-                                    <th>Permit Name</th>
-                                    <th>Permit Type</th>
-                                    <th>Status</th>
-                                    <th>Vendor</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {props.ePermitsData?.map((item: any) => {
-                                    return (
-                                      <tr>
-                                        <td>{item.Permit}</td>
-                                        <td>{item.PermitType}</td>
-                                        <td>{item.Status}</td>
-                                        <td>{item.Vendor}</td>
-                                      </tr>
-                                    );
-                                  })}
-                                </tbody>
-                              </Table>
-                            </CardBody>
-                          </Card>
-                        </>
-                      )}
+                    {props.ePermitsData?.ePermitsData && props.ePermitsData?.ePermitsData?.length > 0 && (
+                      <>
+                        <Card>
+                          <CardBody>
+                            <h3>ePermits </h3>
+                            <Table striped>
+                              <thead>
+                                <tr>
+                                  <th>Permit Name</th>
+                                  <th>Permit Type</th>
+                                  <th>Status</th>
+                                  <th>Vendor</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {props.ePermitsData?.ePermitsData?.map((item: any) => {
+                                  return (
+                                    <tr>
+                                      <td>{item.Permit}</td>
+                                      <td>{item.PermitType}</td>
+                                      <td>{item.Status}</td>
+                                      <td>{item.Vendor}</td>
+                                    </tr>
+                                  );
+                                })}
+                              </tbody>
+                            </Table>
+                          </CardBody>
+                        </Card>
+                      </>
+                    )}
                   </>
                 )}
               </>
