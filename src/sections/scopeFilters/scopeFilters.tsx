@@ -82,10 +82,7 @@ export const ScopeFiltersComponent: React.FC<
     ProjectName.ePermits,
     ProjectName.elogBooks,
   ]);
-  const [insightProjectName, setInsightProjectName] = React.useState<any>([
-    ProjectNameInsight.harBour,
-    ProjectNameInsight.IFMhub,
-  ]);
+  const [insightProjectName, setInsightProjectName] = React.useState<any>("");
 
   const defaultOption = {
     value: "global.dropdown.default",
@@ -933,9 +930,9 @@ export const ScopeFiltersComponent: React.FC<
       case SectionType.AuditAction:
         return "Audit Action Items";
       case SectionType.AuditSummary:
-        return "Audit Summary";
+        return "Site Summary";
       case SectionType.AuditSiteInsights:
-        return "Audit/Site Insights";
+        return "Audit Insights";
       case SectionType.Recommendation:
         return "Recommendations";
       default:
@@ -1035,13 +1032,7 @@ export const ScopeFiltersComponent: React.FC<
   };
 
   const onInsightProjectSelect = (projectNameNew: any) => {
-    if (insightProjectName.includes(projectNameNew)) {
-      setInsightProjectName(
-        insightProjectName.filter((item) => item !== projectNameNew)
-      );
-    } else {
-      setInsightProjectName([...insightProjectName, projectNameNew]);
-    }
+    setInsightProjectName([projectNameNew]);
   };
 
   const getAuditSummaryDropDown = () => {
@@ -1139,7 +1130,7 @@ export const ScopeFiltersComponent: React.FC<
             <span>elogBooks</span>
           </div>
         </div>
-        {getAuditSummaryDropDown()}
+        {getElogbooksDropdowns()}
       </>
     );
   };
@@ -1150,7 +1141,7 @@ export const ScopeFiltersComponent: React.FC<
         <div className="chips">
           <div
             className={`${
-              insightProjectName.includes(ProjectNameInsight.harBour)
+              insightProjectName == ProjectNameInsight.harBour
                 ? "chip-selected"
                 : ""
             } chip`}
@@ -1160,7 +1151,7 @@ export const ScopeFiltersComponent: React.FC<
           </div>
           <div
             className={`${
-              insightProjectName.includes(ProjectNameInsight.IFMhub)
+              insightProjectName == ProjectNameInsight.IFMhub
                 ? "chip-selected"
                 : ""
             } chip`}
@@ -1168,6 +1159,27 @@ export const ScopeFiltersComponent: React.FC<
           >
             <span>IFM Hub</span>
           </div>
+          <div
+            className={`${
+              insightProjectName == ProjectNameInsight.myVintage
+                ? "chip-selected"
+                : ""
+            } chip`}
+            onClick={() => onInsightProjectSelect(ProjectNameInsight.myVintage)}
+          >
+            <span>My Vintage </span>
+          </div>
+          <div
+            className={`${
+              insightProjectName == ProjectNameInsight.talentCouch
+                ? "chip-selected"
+                : ""
+            } chip`}
+            onClick={() => onInsightProjectSelect(ProjectNameInsight.talentCouch)}
+          >
+            <span>Talent Coach</span>
+          </div>
+
         </div>
         {getFilters()}
 
@@ -1433,7 +1445,7 @@ export const ScopeFiltersComponent: React.FC<
                         <Table striped>
                           <thead>
                             <tr>
-                              <th>Permit</th>
+                              <th>Permit Name</th>
                               <th>Permit Type</th>
                               <th>Status</th>
                               <th>Vendor</th>
@@ -1518,7 +1530,7 @@ export const ScopeFiltersComponent: React.FC<
             <>
               <Card>
                 <CardBody>
-                  <h3>Harbour Summary</h3>
+                  <h3>Harbour Insights</h3>
                   <ReactMarkdown>{props.auditInsight}</ReactMarkdown>
                 </CardBody>
               </Card>
@@ -1638,7 +1650,7 @@ export const ScopeFiltersComponent: React.FC<
                     }`}
                     onClick={() => getSection(SectionType.AuditSummary)}
                   >
-                    <span>Audit Summary</span>
+                    <span>Site Summary</span>
                   </div>
                   <div
                     className={`button-sections ${
@@ -1648,7 +1660,7 @@ export const ScopeFiltersComponent: React.FC<
                     }`}
                     onClick={() => getSection(SectionType.AuditSiteInsights)}
                   >
-                    <span>Audit/Site Insight</span>
+                    <span>Audit Insight</span>
                   </div>
                 </div>
                 {renderSection()}

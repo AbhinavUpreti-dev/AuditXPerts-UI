@@ -68,6 +68,8 @@ export enum ProjectName {
 export enum ProjectNameInsight {
   "harBour" = "harbour",
   "IFMhub" = "IFMhub",
+  'myVintage' = 'myVintage',
+  "talentCouch" = "talentCouch",
 }
 
 export enum Months {
