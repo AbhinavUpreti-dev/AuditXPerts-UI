@@ -54,6 +54,7 @@ export interface ScopeFiltersProps {
   getAuditActionItems(filters: string, title): void;
   auditActionItems: any;
 
+
   getAuditInSight(filters: string, isIFMHub: boolean,timeLine:any): void;
   auditInsight: any;
   ifmHubInsight: any;
@@ -132,6 +133,8 @@ export const ScopeFiltersComponent: React.FC<
     getInitialValues(ScopeFilterAttributeEnum.Location)
   );
 
+  const [auditCategory, setAuditCategory] = React.useState(getInitialValues("auditCategory"));
+
   const [customer, setCustomer] = React.useState(getInitialValues("customer"));
 
   const [project, setProject] = React.useState(getInitialValues("project"));
@@ -158,7 +161,7 @@ export const ScopeFiltersComponent: React.FC<
   >(undefined);
 
   const [selectedMonth, setSelectedMonth] = React.useState<Months | undefined>(
-    undefined
+    Months["3Months"]
   );
   interface FilterMapping {
     key: ScopeFilterAttributeEnum;
@@ -277,15 +280,17 @@ export const ScopeFiltersComponent: React.FC<
       case ScopeFilterAttributeEnum.Region:
         return [{ label: "EMEA", value: "3" }];
       case ScopeFilterAttributeEnum.Country:
-        return [{ label: "Switzerland", value: "10" }];
+        return [{ label: "United Kingdom", value: "10" }];
       case ScopeFilterAttributeEnum.Division:
         return [{ label: "Central Europe & Nordics", value: "826" }];
       case ScopeFilterAttributeEnum.ManagingOffice:
-        return [{ label: "Industrial & Tech Serv. Switz", value: "22779" }];
+        return [{ label: "Industrial & Tech Serv. Santander", value: "22779" }];
       case ScopeFilterAttributeEnum.Client:
-        return [{ label: "PJM Industrial & Tech Serv Switz", value: "3334" }];
+        return [{ label: "Santander", value: "3334" }];
       case ScopeFilterAttributeEnum.Location:
-        return [{ label: "Project Getec Park Stein", value: "628665" }];
+        return [{ label: "Aberdeen 171-173 US-ST032313", value: "628665" }];
+      case "auditCategory":
+          return [{ label: "Electrical Safety", value: "Electrical Safety" }];
       case "customer":
         return [{ label: "Santander", value: "Santander" }];
       case "project":
@@ -392,6 +397,9 @@ export const ScopeFiltersComponent: React.FC<
         break;
       case ScopeFilterAttributeEnum.Location:
         setLocation(e);
+        break;
+      case "auditCategory":
+        setAuditCategory(e);
         break;
       case "customer":
         setCustomer(e);
@@ -732,6 +740,29 @@ export const ScopeFiltersComponent: React.FC<
             label={"Location"}
           />
         </Col>
+        { insightProjectName.includes(ProjectNameInsight.harBour) && (
+          <Col xs={6} md={3} lg={3}>
+          <FloatingLabelSelect
+            // onMenuScrollToBottom={() =>
+            //   handleScroll(ScopeFilterAttributeEnum.Location)
+            // }
+            loadingMessage={(obj: any) => "Please Wait"}
+            isLoading={props.location.isLoading}
+            onInputChange={(e: any) =>
+              onTextInputChange(e, ScopeFilterAttributeEnum.AuditCategory)
+            }
+            options={getFilterOptionsData("auditCategory")}
+            value={auditCategory}
+            onChange={(e) =>
+              onSelectionChange(e, ScopeFilterAttributeEnum.AuditCategory)
+            }
+            filterOption={() => {
+              return true;
+            }}
+            label={"Audit Category"}
+          />
+        </Col>)
+        }
       </Row>
     );
   };
@@ -1157,7 +1188,7 @@ export const ScopeFiltersComponent: React.FC<
             } chip`}
             onClick={() => onInsightProjectSelect(ProjectNameInsight.IFMhub)}
           >
-            <span>IFM Hub</span>
+            <span>IFMHub</span>
           </div>
           <div
             className={`${
@@ -1167,7 +1198,7 @@ export const ScopeFiltersComponent: React.FC<
             } chip`}
             onClick={() => onInsightProjectSelect(ProjectNameInsight.myVintage)}
           >
-            <span>My Vintage </span>
+            <span>My Vantage </span>
           </div>
           <div
             className={`${
@@ -1523,8 +1554,7 @@ export const ScopeFiltersComponent: React.FC<
         );
       case SectionType.AuditSiteInsights:
         if (
-          insightProjectName.includes(ProjectNameInsight.harBour) &&
-          insightProjectName.includes(ProjectNameInsight.IFMhub)
+          insightProjectName.includes(ProjectNameInsight.harBour) 
         ) {
           return (
             <>
@@ -1538,8 +1568,8 @@ export const ScopeFiltersComponent: React.FC<
               {/* <ReactMarkdown>{props.incidentInsight}</ReactMarkdown> */}
               <Card>
                 <CardBody>
-                  <h3>IFM hub Summary</h3>
-                  <ReactMarkdown>{props.ifmHubInsight}</ReactMarkdown>
+                  <h3>Incident Insights</h3>
+                  <ReactMarkdown>{props.incidentInsight}</ReactMarkdown>
                 </CardBody>
               </Card>
             </>
@@ -1549,26 +1579,13 @@ export const ScopeFiltersComponent: React.FC<
             <>
               <Card>
                 <CardBody>
-                  <h3>IFM hub Summary</h3>
+                  <h3>IFMHub Assets - Health Insights</h3>
                   <ReactMarkdown>{props.ifmHubInsight}</ReactMarkdown>
                 </CardBody>
               </Card>
             </>
           );
-        } else if (insightProjectName.includes(ProjectNameInsight.harBour)) {
-          return (
-            <>
-              <Card>
-                <CardBody>
-                  <h3>Harbour Summary</h3>
-                  <ReactMarkdown>{props.auditInsight}</ReactMarkdown>
-                  <ReactMarkdown>{props.incidentInsight}</ReactMarkdown>
-                </CardBody>
-              </Card>
-            </>
-          );
         }
-
       case SectionType.Recommendation:
         return <ReactMarkdown>{props.recommendations}</ReactMarkdown>;
     }

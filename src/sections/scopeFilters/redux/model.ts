@@ -49,6 +49,7 @@ export enum ScopeFilterAttributeEnum {
   ClientCode = "clientCode",
   LocationCode = "locationCode",
   Title = "title",
+  AuditCategory = "auditCategory",
 }
 
 export enum SectionType {
